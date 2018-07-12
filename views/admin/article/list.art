@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		{{include 'admin/public/header.art'}}
+		<link rel="stylesheet" href="{{__HOST__}}/admin/js/jqPagination/css/pagination.css">
+		<link rel="stylesheet" href="{{__HOST__}}/admin/js/select2/select2.css">
+		<style>
+			.col-xs-1, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9, .col-xs-10, .col-xs-11, .col-xs-12, .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12, .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12, .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12 {
+				padding-right: 12px;
+				padding-left: 0px;
+			}
+			.sort_input{
+				width:60px;
+			}
+			.table-responsive{
+				margin-top:10px;
+			}
+			.form .form-group{
+				overflow: hidden;
+				padding-left: 0px;
+				padding-right: 0px;
+			}
+			.form .form-group label{
+				padding-top: 6px;
+				padding-left: 0px;
+				padding-right: 0px;
+			}
+			.input-group{
+				width:100%;
+			}
+			.btnbox{
+				background-color: transparent;
+				border:1px solid #ccc;
+				outline: none;
+			}
+			.margin-right{
+				margin-right:10px;
+			}
+			.search-box{
+				display: none;
+			}
+			.search-box,.search-box .form{
+				overflow: hidden;
+			}
+			.search-box .form{
+				margin-top:10px;
+			}
+			select{
+				-webkit-appearance: none;
+				-moz-appearance: none;
+				outline: none;
+			}
+		</style>
+	</head>
+	
+	<body>
+		<div class="navbar navbar-default" id="navbar">
+			<script type="text/javascript">
+				try{ace.settings.check('navbar' , 'fixed')}catch(e){}
+			</script>
+			{{include 'admin/public/nav_top.art'}}
+		</div>
+
+		<div class="main-container" id="main-container">
+			<script type="text/javascript">
+				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+			</script>
+
+			<div class="main-container-inner">
+				<a class="menu-toggler" id="menu-toggler" href="#">
+					<span class="menu-text"></span>
+				</a>
+
+				{{include 'admin/public/nav_left.art'}}
+
+				<div class="main-content">
+					<div class="breadcrumbs" id="breadcrumbs">
+						<script type="text/javascript">
+							try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+						</script>
+
+						<ul class="breadcrumb">
+							<li>
+								<i class="icon-home home-icon"></i>
+								<a href="{{__HOST__}}/admin">首页</a>
+							</li>
+							<li class="active">内容列表</li>
+						</ul><!-- .breadcrumb -->
+
+						<div class="nav-search" id="nav-search">
+							<form class="form-search">
+								<span class="input-icon">
+									<button id="search-down" data-key="0" type="button" class="btnbox">
+										<i class="fa fa-filter"></i>
+										<span>查询</span>
+									</button>
+								</span>
+							</form>
+						</div><!-- #nav-search -->
+					</div>
+
+					<div class="page-content">
+						<!--查询条件-->
+						<div class="search-box">
+							<div class="page-header">
+								<h1>
+									查询
+								</h1>
+							</div><!-- /.page-header -->
+							<form class="form">
+								<div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-12">
+									<label class="control-label col-sm-3 col-xs-2 no-padding-right">标题：</label>
+									<div class="control-inline col-sm-9 col-xs-12">
+										<div class="input-group">
+											<input type="text" id="title" value="{{title}}" class="form-control col-sm-12">
+										</div>
+									</div>
+								</div>
+								<div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-12">
+									<label class="control-label col-sm-3 col-xs-2 no-padding-right">分类：</label>
+									<div class="control-inline col-sm-9 col-xs-12">
+										<div class="input-group">
+											<input type="hidden" id="cate" value="{{cid}}">
+                                            <input type="text" class="form-control" id="cate-input">
+                                            <span class="input-group-addon" id="cate-icon">
+                                                <i class="fa fa-search bigger-110"></i>
+                                            </span>
+                                        </div>
+									</div>
+								</div>
+								<div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-12">
+									<label class="control-label col-sm-3 col-xs-2 no-padding-right">排序：</label>
+									<div class="control-inline col-sm-9 col-xs-12">
+										<div class="input-group">
+											<input type="number" id="sort" value="{{sort}}" class="form-control col-sm-12">
+										</div>
+									</div>
+								</div>
+								<div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-12">
+									<label class="control-label col-sm-3 col-xs-2 no-padding-right">热门：</label>
+									<div class="control-inline col-sm-9 col-xs-12">
+										<div class="input-group">
+											<select id="hot"></select>
+										</div>
+									</div>
+								</div>
+								<div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-12">
+									<label class="control-label col-sm-3 col-xs-2 no-padding-right">精品：</label>
+									<div class="control-inline col-sm-9 col-xs-12">
+										<div class="input-group">
+											<select id="best"></select>
+										</div>
+									</div>
+								</div>
+								<div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-12">
+									<label class="control-label col-sm-3 col-xs-2 no-padding-right">新品：</label>
+									<div class="control-inline col-sm-9 col-xs-12">
+										<div class="input-group">
+											<select id="new"></select>
+										</div>
+									</div>
+								</div>
+								<div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-12">
+									<label class="control-label col-sm-3 col-xs-2 no-padding-right">状态：</label>
+									<div class="control-inline col-sm-9 col-xs-12">
+										<div class="input-group">
+											<select id="status"></select>
+										</div>
+									</div>
+								</div>
+								<div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+									<div class="control-inline col-sm-12 col-xs-12">
+										<div class="input-group">
+											<button id="search" type="button" class="btn btn-primary margin-right">
+												查询
+											</button>
+											<button type="button" class="btn btn-primary" onclick="location.href='{{__HOST__}}/admin/article'">
+												重置
+											</button>
+										</div>
+									</div>
+								</div>
+								<div id="tree" class="ztree" style="display:none;padding:20px;"></div>		
+							</form>
+						</div>
+						<!--查询条件-->
+						<div class="page-header">
+							<h1>
+								内容列表
+							</h1>
+						</div><!-- /.page-header -->
+						<!--表格-->
+						<div class="table-responsive">
+							<table class="table table-striped table-bordered table-hover center">
+								<thead>
+									<tr>
+										<th class="center">标题</th>
+										<th class="center">分类</th>
+										<th class="center">
+											<i class="icon-time bigger-110 hidden-480"></i>
+											发布时间
+										</th>
+										<th width="60px;" class="center">排序</th>
+										<th width="60px;" class="center">热门</th>
+										<th width="60px;" class="center">精品</th>
+										<th width="60px;" class="center">新品</th>
+										<th width="60px;" class="center">状态</th>
+										<th width="100px;" class="center">操作</th>
+									</tr>
+								</thead>
+								<tbody id="tbody">
+								</tbody>
+							</table>
+						</div>
+						<div class="page">
+							<div id="pagination" style="float:right;"></div>
+						</div>
+					</div>
+				</div><!-- /.main-content -->
+			
+			</div><!-- /.main-container-inner -->
+
+			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+				<i class="icon-double-angle-up icon-only bigger-110"></i>
+			</a>
+		</div><!-- /.main-container -->
+		{{include 'admin/public/footer.art'}}
+		<script type="text/javascript" src="{{__HOST__}}/admin/js/jqPagination/js/pagination.min.js"></script>
+		<script type="text/javascript" src="{{__HOST__}}/admin/js/select2/select2.js"></script>
+		<script type="text/javascript">
+			(function($){
+				/**
+				 * 
+				 * @class List
+				*/
+				function List(){
+					this.page=1;
+					this.pagesize=10;
+					this.totalSize= 0
+				}
+				/**
+				 * 
+				 * @method init 初始化
+				*/
+				List.prototype.init=function(){
+					var self=this
+					//获取分类的数据
+					this.getCate(function(){
+						//先初始化所有插件
+						self.bindEvent(function(){
+							//获取表格列表
+							self.getData()
+						})
+					})
+				}
+				/**
+				 * 
+				 * @method setFilter 设置过滤条件
+				 * @param {Object} res 服务器返回的数据
+				*/
+				List.prototype.setFilter=function(res){
+					function setSelect(attr,dom){
+						if(attr===0){
+						$(dom).select2('val','2')
+						}else if(attr==1){
+							$(dom).select2('val','1')
+						}else{
+							$(dom).select2('val','0')
+						}
+					}
+					setSelect(res.status,'#status');
+					setSelect(res.is_hot,'#hot');
+					setSelect(res.is_best,'#best');
+					setSelect(res.is_new,'#new');
+					$('#sort').val(res.sort);
+					$('#cate').val(res.cid);
+					var cate_input=res.cateobj[res.cid]&&res.cateobj[res.cid].title
+					$('#cate-input').val(cate_input);
+					$('#title').val(res.title);
+				}
+				/**
+				 * 
+				 * @method getData 获取数据列表
+				 * @param {Function} cb 回调函数
+				*/
+				List.prototype.getData=function(cb){
+					var self=this
+					var url="{{__HOST__}}/admin/article/getdata"
+					getSubmit(url,self.getfilter(),function(res){
+						if(res.code===0){
+							if(res.list.length>0){
+								var html = self.getHtml(res.list)
+								self.totalSize=res.totalSize;
+								$('#tbody').html(html)
+							}else{
+								self.totalSize=res.totalSize;
+								$('#tbody').html('<tr><td colspan="9" style="padding:100px 0;">暂无数据</td></tr>')
+							}
+							//重新更新表格里的dom操作
+							self.updateEvent()
+							//设置过滤
+							self.setFilter(res);
+							sessionStorage.setItem('__edit_cateobj_',JSON.stringify(res.cateobj))
+							$("#pagination").whjPaging("setPage", {currPage: self.page, totalPage: Math.ceil(self.totalSize/self.pagesize), totalSize: self.totalSize});
+							cb&&cb()
+						}
+					})
+				}
+				/**
+				 * 
+				 * @method updateEvent 表格更新后表格里面的dom操作也要重新更新
+				*/
+				List.prototype.updateEvent=function(){
+					var self = this
+					//改变状态，热门等
+					self.changeEvent('.btn-status','status');
+					self.changeEvent('.btn-hot','is_hot');
+					self.changeEvent('.btn-best','is_best');
+					self.changeEvent('.btn-new','is_new');
+					$('.sort_input').blur(function(){
+						var id = $(this).attr('data-id');
+						var val = $(this).val();
+						if(val===""){
+							layer.msg('不能为空',{icon:2})
+							$(this).focus()
+						}else{
+							var url = "{{__HOST__}}/admin/article/changeSort";
+							postSubmit(url,{id:id,sort:parseInt(val)},function(res){
+								console.log(res.msg)
+							})
+						}
+					})
+					$('.btn-edit').click(function(){
+						var id=$(this).attr('data-id');
+						sessionStorage.setItem('__edit_params_',JSON.stringify(self.getfilter()))
+						location.href="{{__HOST__}}/admin/article/edit/"+id;
+					})
+					//删除
+					$('.remove').click(function(){
+						var id=$(this).attr('data-id');
+						var $this=$(this);
+						layer.confirm('是否删除该内容？', {
+							'title':'警告',
+							btn: ['确定','取消'] //按钮
+						}, function(){
+							//此函数封装在basic.js中
+							publicRemove('article',id,function(res){
+								if(res.code===0){
+									layer.msg(res.msg,{icon:1})
+									$this.parent('.btn-group').parent('td').parent('tr').remove()
+									self.getData()
+								}else{
+									layer.msg(res.msg,{icon:2})
+								}
+							})
+						}, function(){
+							return true;
+						});
+					})
+				}
+				/**
+				 * 
+				 * @method getCate 获取分类树
+				 * @param {Function} cb 回调函数
+				*/
+				List.prototype.getCate=function(cb){
+					var self=this
+					var url="{{__HOST__}}/admin/articlecate/getcate"
+					//此函数封装在basic.js中
+					postSubmit(url,{pid:0},function(res){
+						if(res.code===0){
+							self.zTreeObj = $.fn.zTree.init($("#tree"), {
+								data:{
+									simpleData:{
+										enable: true,
+										idKey:'id',
+										pIdKey :'pid'
+									}
+								}
+							}, res.data);
+							self.zTreeObj.expandAll(true);
+							cb&&cb();
+						}else{
+							layer.msg(res.msg,{icon:2})
+						}
+					})
+				}
+				/**
+				 * 
+				 * @method getHtml 组装HTML
+				 * @param {Array} list 列表
+				*/
+				List.prototype.getHtml=function(list){
+						var str='';
+						for(var i=0;i<list.length;i++){
+							str+='<tr>';
+								str+='<td>'+list[i].title+'</td>';
+								str+='<td>'+list[i].catename+'</td>';
+								str+='<td>'+list[i].add_time+'</td>';
+								str+='<td>';
+									str+='<input type="number" data-id="'+list[i]._id+'" value="'+list[i].sort+'" class="sort_input"/>';
+								str+='</td>';
+								str+='<td>';
+									if(list[i].is_hot==1){
+										str+='<button data-id="'+list[i]._id+'" class="btn btn-xs btn-success btn-hot">';
+											str+='<i class="icon-ok bigger-120"></i>';
+										str+='</button>';
+									}else{
+										str+='<button data-id="'+list[i]._id+'" class="btn btn-xs btn-danger btn-hot">';
+											str+='<i class="icon-remove bigger-130"></i>';
+										str+='</button>';
+									}
+								str+='</td>';
+								str+='<td>';
+									if(list[i].is_best==1){
+										str+='<button data-id="'+list[i]._id+'" class="btn btn-xs btn-success btn-best">';
+												str+='<i class="icon-ok bigger-120"></i>';
+										str+='</button>';
+									}else{
+										str+='<button data-id="'+list[i]._id+'" class="btn btn-xs btn-danger btn-best">';
+											str+='<i class="icon-remove bigger-130"></i>';
+										str+='</button>';
+									}
+								str+='</td>';
+								str+='<td>';
+									if(list[i].is_new==1){
+										str+='<button data-id="'+list[i]._id+'" class="btn btn-xs btn-success btn-new">';
+												str+='<i class="icon-ok bigger-120"></i>';
+										str+='</button>';
+									}else{
+										str+='<button data-id="'+list[i]._id+'" class="btn btn-xs btn-danger btn-new">';
+											str+='<i class="icon-remove bigger-130"></i>';
+										str+='</button>';
+									}
+								str+='</td>';
+								str+='<td>';
+									if(list[i].status==1){
+										str+='<button data-id="'+list[i]._id+'" class="btn btn-xs btn-success btn-status">';
+												str+='<i class="icon-ok bigger-120"></i>';
+										str+='</button>';
+									}else{
+										str+='<button data-id="'+list[i]._id+'" class="btn btn-xs btn-danger btn-status">';
+												str+='<i class="icon-remove bigger-130"></i>';
+										str+='</button>';
+									}
+								str+='</td>';
+								str+='<td>';
+									str+='<div class="btn-group center">';
+										str+='<button  data-id="'+list[i]._id+'" class="btn btn-xs btn-info btn-edit">';
+											str+='<i class="icon-edit bigger-120"></i>';
+										str+='</button>';
+										str+='&nbsp;';
+										str+='<button data-id="'+list[i]._id+'" class="btn btn-xs btn-danger remove">';
+											str+='<i class="icon-trash bigger-120"></i>';
+										str+='</button>';
+									str+='</div>';
+								str+='</td>';
+							str+='</tr>';
+						}
+						return str;
+					}
+				/**
+				 * 
+				 * @method getfilter 获取筛选条件
+				*/
+				List.prototype.getfilter=function(){
+					var self=this;
+					var editParams=JSON.parse(sessionStorage.getItem('__edit_params_'))
+					if(editParams!=null){
+						var cateObj=JSON.parse(sessionStorage.getItem('__edit_cateobj_'))
+						var data=[{id:0,text:'',status:null},{id:1,text:'是',status:1},{id:2,text:'否',status:0}];
+						function setSelect(dom,attr){
+							var item = _.find(data,function(item){ 
+								return item.status===attr
+							})
+							$(dom).select2('val',item.id+'')
+						}
+						setSelect("#hot",editParams['is_hot'])
+						setSelect("#best",editParams['is_best'])
+						setSelect("#new",editParams['is_new'])
+						setSelect("#status",editParams['status'])
+						$('#sort').val(editParams['sort']);
+						$('#cate').val(editParams['cid']);
+						var cate_input=cateObj[editParams.cid]&&cateObj[editParams.cid].title
+						$('#cate-input').val(cate_input);
+						$('#title').val(editParams['title']);
+						self.page=editParams['page'];
+						self.pagesize=editParams['pagesize'];
+						self.totalSize=editParams['totalSize'];
+						$("#pagination").whjPaging("setPage", {currPage: self.page, totalPage: Math.ceil(self.totalSize/self.pagesize), totalSize: self.totalSize});
+						//清除缓存
+						sessionStorage.removeItem('__edit_params_');
+					}
+					var is_hot=$("#hot").select2('data')[0].status;
+					var is_best=$("#best").select2('data')[0].status;
+					var is_new=$("#new").select2('data')[0].status;
+					var status=$("#status").select2('data')[0].status;
+					var sort = $('#sort').val()?parseInt($('#sort').val()):$('#sort').val();
+					var cate = $('#cate').val();
+					var title = $('#title').val();
+					var params={
+						is_hot:is_hot,
+						is_best:is_best,
+						is_new:is_new,
+						status:status,
+						sort:sort,
+						cid:cate,
+						title:title,
+						page:self.page,
+						pagesize:self.pagesize,
+						totalSize:self.totalSize
+					}
+					return params;
+				}
+				/**
+				 * 
+				 * @method changeEvent 改变状态，热门等
+				 * @param {Object} dom 要改变的元素
+				 * @param {String} attr 要改变的属性
+				*/
+				List.prototype.changeEvent=function(dom,attr){
+					var self = this
+					$(dom).on('click',function(){
+						var $this=$(this);
+						var id=$(this).attr('data-id')
+						//changeStatus 此函数封装在basic.js中
+						changeStatus('article',attr,id,function(res){
+							if(res.code===0){
+								if(res.data[attr]===1){
+									$this.removeClass('btn-danger').addClass('btn-success')
+									.children('i').removeClass('icon-remove').addClass('icon-ok')
+								}else{
+									$this.removeClass('btn-success').addClass('btn-danger')
+									.children('i').removeClass('icon-ok').addClass('icon-remove')
+								}
+							}else{
+								layer.msg(res.msg,{icon: 2})
+							}
+						})
+					})
+				}
+				/**
+				 * 
+				 * @method bindEvent dom操作
+				 * @param {Function} cb 回调
+				*/
+				List.prototype.bindEvent=function(cb){
+					var self = this
+					$('#search-down').click(function(){
+						var key = $(this).attr('data-key');
+						if(key=='0'){
+							$('.search-box').show()
+							$(this).attr('data-key','1').children('span').html('收起');
+						}else{
+							$('.search-box').hide()
+							$(this).attr('data-key','0').children('span').html('查询');
+						}
+					})
+					/**
+					 * 
+					 * @method changeCate 改变上级分类
+					*/
+					function changeCate(){
+						var node = self.zTreeObj.getNodeByParam("id", $('#cate').val());
+						self.zTreeObj.selectNode(node);
+                        layer.open({
+							type: 1,
+							title: '分类',
+							maxmin: true,
+							area: ['300px', '400px'],
+							btn: ['确定', '清除', '取消'],
+							content: $('#tree'),
+							yes: function(index, layero){
+								var selectNode=self.zTreeObj.getSelectedNodes();
+								if(selectNode.length>0){
+									$('#cate').val(selectNode[0].id)
+									$('#cate-input').val(selectNode[0].name)
+								}else{
+									$('#cate').val('')
+									$('#cate-input').val('')
+								}
+								return true
+							}
+							,btn2: function(index, layero){
+								self.zTreeObj.cancelSelectedNode()
+								return false
+							}
+							,btn3: function(index, layero){
+								return true
+							}
+						});
+					}
+					/**
+					 * 
+					 * @method select 下拉框初始化
+					 * @param {Object} dom 要初始化下拉框的dom
+					*/
+					function select(dom){
+						var data=[{id:0,text:'',status:null},{id:1,text:'是',status:1},{id:2,text:'否',status:0}];
+						$(dom).select2({
+							data:data
+						});
+					}
+					//点击上级分类
+					$('#cate-icon').click(function(){
+						$('#cate-input').blur()
+                        changeCate()
+					})
+					//点击上级分类
+                    $('#cate-input').focus(function(){
+						$('#cate-input').blur()
+                        changeCate()
+					})
+										
+					//初始化下拉框
+					select('#hot');
+					select('#best');
+					select('#new');
+					select('#status');
+					var editParams=JSON.parse(sessionStorage.getItem('__edit_params_'))
+					if(editParams!=null){
+						self.pagesize=editParams['pagesize']
+						console.log(self.pagesize)
+					}
+					//分页初始化
+					$("#pagination").whjPaging({
+						totalSize: self.totalSize,
+						pageSizeOpt: [
+							{value: 5, text: '5条/页',selected:self.pagesize==5?true:false},
+							{value: 10, text: '10条/页',selected:self.pagesize==10?true:false},
+							{value: 20, text: '20条/页',selected:self.pagesize==20?true:false},
+							{value: 50, text: '50条/页',selected:self.pagesize==50?true:false},
+							{value: 100, text: '100条/页',selected:self.pagesize==100?true:false}
+						],
+						isShowRefresh: true,
+						totalPage: Math.ceil(self.totalSize/self.pagesize),
+						callBack: function (currPage, pageSize) {
+							self.page=currPage;
+							self.pagesize=pageSize;
+							//分页改变加载数据
+							self.getData()
+						}
+					});
+					//查询
+					$("#search").click(function(){
+						//加载数据
+						self.getData();
+					})
+					
+					$('table th input:checkbox').on('click' , function(){
+						var that = this;
+						$(this).closest('table').find('tr > td:first-child input:checkbox')
+						.each(function(){
+							this.checked = that.checked;
+							$(this).closest('tr').toggleClass('selected');
+						});
+							
+					});
+					$('[data-rel="tooltip"]').tooltip({placement: function(context, source) {
+						var $source = $(source);
+						var $parent = $source.closest('table')
+						var off1 = $parent.offset();
+						var w1 = $parent.width();
+				
+						var off2 = $source.offset();
+						var w2 = $source.width();
+				
+						if( parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2) ) return 'right';
+						return 'left';
+					}});
+					cb&&cb()
+				}
+				//初始化
+				new List().init()
+			})(jQuery)
+		</script>
+	
+</body>
+</html>
+

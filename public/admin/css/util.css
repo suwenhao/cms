@@ -1,0 +1,138 @@
+.form {
+    margin-top:40px;
+}
+.form .form-group{
+    overflow: hidden;
+}
+.form .form-group>label{
+    text-align: right;
+}
+.form .radio{
+    padding-top:0;
+    display: inline-block;
+    margin-top:0;
+}
+.form .checkbox{
+    padding-top:0;
+    display: inline-block;
+    margin-top:0;
+}
+.input-group{
+    width:100%;
+}
+.ace-file-input {
+    display: block;
+    font-size: inherit;
+    position: relative;
+    height: 30px;
+}
+@media screen and (-webkit-min-device-pixel-ratio: 0){
+    .ace-file-input input[type=file] {
+        position: absolute;
+        width: 0;
+        height: 0;
+    }
+}
+.ace-file-input input[type=file] {
+    position: absolute;
+    z-index: -999;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    opacity: 0;
+    filter: alpha(opacity=0);
+}
+.ace-file-input .ace-file-container {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 30px;
+    background-color: #FFF;
+    border: 1px solid #D5D5D5;
+    cursor: pointer;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    -webkit-transition: all .15s;
+    -o-transition: all .15s;
+    transition: all .15s;
+}
+.ace-file-input .ace-file-container:before {
+    display: inline-block;
+    content: attr(data-title);
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    line-height: 24px;
+    text-align: center;
+    padding: 0 8px;
+    background-color: #6FB3E0;
+    color: #FFF;
+    font-size: 11px;
+    font-weight: 700;
+    border: 2px solid #FFF;
+    border-left-width: 4px;
+    -webkit-transition: all .3s;
+    -o-transition: all .3s;
+    transition: all .3s;
+}
+.ace-file-input .ace-file-container .ace-file-name {
+    display: inline-block;
+    height: 28px;
+    max-width: 80%;
+    white-space: nowrap;
+    overflow: hidden;
+    line-height: 28px;
+    color: #888;
+    font-size: 13px;
+    vertical-align: top;
+    position: static;
+    padding-left: 30px;
+    text-align: left;
+}
+.ace-file-input .ace-file-container .ace-icon {
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    line-height: 24px;
+    width: 26px;
+    text-align: center;
+    font-family: FontAwesome;
+    font-size: 13px;
+    border: 2px solid #FFF;
+    color: #FFF;
+    -webkit-transition: all .1s;
+    -o-transition: all .1s;
+    transition: all .1s;
+    background-color: #D1D1D1;
+}
+.ace-file-input .ace-file-container .ace-file-name:after {
+    display: inline-block;
+    content: attr(data-title);
+}
+.ace-file-input .remove {
+    position: absolute;
+    right: -8px;
+    top: 6px;
+    display: none;
+    width: 17px;
+    text-align: center;
+    height: 17px;
+    line-height: 15px;
+    font-size: 11px;
+    font-weight: 400;
+    background-color: #FB7142;
+    border-radius: 100%;
+    color: #FFF;
+    text-decoration: none;
+}
+.ace-file-input .ace-file-container.selected {
+    right: 16px;
+}
+.ace-file-input .ace-file-container.selected+.remove {
+    display: inline-block;
+}

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		{{include 'admin/public/header.art'}}
+		<link rel="stylesheet" href="{{__HOST__}}/admin/css/util.css">
+	</head>
+	<body>
+		<div class="navbar navbar-default" id="navbar">
+			<script type="text/javascript">
+				try{ace.settings.check('navbar' , 'fixed')}catch(e){}
+			</script>
+			{{include 'admin/public/nav_top.art'}}
+		</div>
+
+		<div class="main-container" id="main-container">
+			<script type="text/javascript">
+				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+			</script>
+
+			<div class="main-container-inner">
+				<a class="menu-toggler" id="menu-toggler" href="#">
+					<span class="menu-text"></span>
+				</a>
+
+				{{include 'admin/public/nav_left.art'}}
+
+				<div class="main-content">
+					<div class="breadcrumbs" id="breadcrumbs">
+						<script type="text/javascript">
+							try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+						</script>
+
+						<ul class="breadcrumb">
+							<li>
+								<i class="icon-home home-icon"></i>
+								<a href="{{__HOST__}}/admin">首页</a>
+							</li>
+							<li class="active">增加轮播图</li>
+						</ul><!-- .breadcrumb -->
+					</div>
+
+					<div class="page-content">
+
+						<div class="page-header">
+							<h1>
+								增加轮播图								
+							</h1>
+						</div><!-- /.page-header -->
+
+						<form class="form" role="form">
+							<div class="form-group">
+								<label class="col-sm-2 control-label no-padding-right" for="title">标题<span style="color:red;">*</span>:</label>
+								<div class="col-sm-10">
+									<div class="col-xs-12 col-sm-6">
+										<div class="input-group">
+											<input type="text" id="title" value="{{data.title}}"  placeholder="输入标题" class="form-control">
+                                        </div>
+									</div>	
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label no-padding-right" for="file">轮播图<span style="color:red;">*</span>:</label>
+								<div class="col-sm-10">
+									<div class="col-xs-12 col-sm-6">
+										<label class="ace-file-input">
+											<input  accept="image/*" type="file" id="pic">
+											<span class="ace-file-container" data-title="选择">
+												<span class="ace-file-name" data-title="没图片">
+													<i class="ace-icon fa fa-picture-o file-image"></i>
+												</span>
+											</span>
+											<a class="remove" href="#">
+												<i class=" ace-icon fa fa-times"></i>
+											</a>
+										</label>
+										<div>
+											<img width="200" src="{{__HOST__}}/{{data.pic}}">
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label no-padding-right" for="username">审核状态:</label>
+								<div class="col-sm-10">
+									<div class="radio"  style="float:left;">
+										<label>
+											<input {{if data.status==1}} checked {{/if}} name="form-field-radio" value="1" type="radio" class="ace form-field-radio">
+											<span class="lbl"> 审核</span>
+										</label>
+									</div>
+									<div class="radio" style="float:left;">
+										<label>
+											<input {{if data.status==0}} checked {{/if}} name="form-field-radio" type="radio" value="0" class="ace form-field-radio">
+											<span class="lbl"> 未审核</span>
+										</label>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label no-padding-right" for="sort">排序:</label>
+								<div class="col-sm-10">
+									<div class="col-xs-12 col-sm-6">
+										<div class="input-group">
+											<input type="number" id="sort" value="{{data.sort}}"  placeholder="输入排序" class="form-control">
+                                        </div>
+									</div>	
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label no-padding-right" for="url">url链接<span style="color:red;">*</span>:</label>
+								<div class="col-sm-10">
+									<div class="col-xs-12 col-sm-6">
+										<div class="input-group">
+											<input type="text" id="url" value="{{data.url}}"   placeholder="输入url" class="form-control">
+                                        </div>
+									</div>	
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label no-padding-right"></label>
+								<div class="col-sm-10">
+									<div class="col-xs-12 col-sm-12">
+										<div class="input-group">
+											<button id="submit" type="button" class="btn btn-primary">提交</button>									
+										</div>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div><!-- /.main-content -->
+			
+			</div><!-- /.main-container-inner -->
+
+			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+				<i class="icon-double-angle-up icon-only bigger-110"></i>
+			</a>
+		</div><!-- /.main-container -->
+		{{include 'admin/public/footer.art'}}
+		<script type="text/javascript">
+			(function(){
+				/**
+				 * 
+				 * @class FocusAdd 
+				*/
+				function FocusAdd(){}
+				/**
+				 * 
+				 * @method init 初始化
+				*/
+				FocusAdd.prototype.init=function(){
+					this.bindEvent()
+				}
+				/**
+				 * 
+				 * @method bindEvent 绑定dom操作
+				*/
+				FocusAdd.prototype.bindEvent=function(){
+					//图片选择
+					$('#pic').change(function(){
+						var file = this.files[0];
+						$('.ace-file-name').attr('data-title',file.name);
+						$('.ace-file-container').addClass('selected');
+					})
+					//图片清除
+					$('.ace-file-input .remove').click(function(){
+						$('#pic').val('');
+						$('.ace-file-name').attr('data-title','没图片');
+						$('.ace-file-container').removeClass('selected');
+					})
+					$('#submit').click(function(e){
+						e.preventDefault()
+						var title=$('#title').val()
+						var url=$('#url').val()
+						var sort=$('#sort').val()
+						var pic = $('#pic')[0].files[0];
+						var status=$('.form-field-radio:checked').val()
+
+						if(title==""){
+							layer.msg('请输入标题',{icon:2})
+						}else if(url==""){
+							layer.msg('请输入链接',{icon:2})
+						}else if(pic==""){
+							layer.msg('请输入选择图片',{icon:2})
+						}else{
+							var formData=new FormData()
+							formData.append("title",title);
+							formData.append("url",url);
+							formData.append("status",parseInt(status));
+							formData.append("pic",pic);
+							formData.append("sort",parsrInt(sort));
+							formData.append("id","{{@data._id}}");
+							formData.append("newpic","{{data.pic}}");
+
+							$.ajax({
+								url: "{{__HOST__}}/admin/focus/doedit",
+								data:  formData,
+								type: "post",
+								dataType: "json",
+								cache: false,//上传文件无需缓存
+								processData: false,//用于对data参数进行序列化处理 这里必须false
+								contentType: false, //必须
+								success: function (res) {
+									if(res.code==0){
+										layer.msg(res.msg,{icon:1})
+										setTimeout(function(){
+											location.href='{{__HOST__}}/admin/focus'
+										},1000)
+									}else{
+										layer.msg(res.msg,{icon:2})
+									}
+								}
+							})
+						}
+					})
+				}
+				//初始化
+				new FocusAdd().init()
+			})()
+		</script>
+</body>
+</html>

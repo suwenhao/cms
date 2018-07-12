@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		{{include 'admin/public/header.art'}}
+	</head>
+
+	<body>
+
+		<div class="main-container" id="main-container">
+			<script type="text/javascript">
+				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+			</script>
+
+			<div class="main-container-inner">
+				<div class="main-content" style="margin-left:0;">
+
+					<div class="page-content">
+						<div class="row">
+							<div class="col-xs-12">
+								<!-- PAGE CONTENT BEGINS -->
+
+								<div class="error-container">
+									<div class="well">
+										<h1 class="grey lighter smaller">
+											<span class="blue bigger-125">
+												<i class="icon-random"></i>
+												404
+											</span>
+											无法访问此页面
+										</h1>
+
+										<hr />
+										<h3 class="lighter smaller">
+											页面出错
+											<i class="icon-wrench icon-animated-wrench bigger-125"></i>
+										</h3>
+
+										<div class="space"></div>
+
+										<div>
+											<h4 class="lighter smaller">请试试以下办法:</h4>
+
+											<ul class="list-unstyled spaced inline bigger-110 margin-15">
+												<li>
+													<i class="icon-hand-right blue"></i>
+													检查网络连接
+												</li>
+
+												<li>
+													<i class="icon-hand-right blue"></i>
+													是否更改了URL链接导致，请重新返回上一页
+												</li>
+											</ul>
+										</div>
+
+										<hr />
+										<div class="space"></div>
+
+										<div class="center">
+											<a onclick="javascript:history.back(-1);" class="btn btn-grey">
+												<i class="icon-arrow-left"></i>
+												返回上一页
+											</a>
+
+											<a href="{{__HOST__}}/admin" class="btn btn-primary">
+												<i class="icon-dashboard"></i>
+												控制台
+											</a>
+										</div>
+									</div>
+								</div><!-- PAGE CONTENT ENDS -->
+							</div><!-- /.col -->
+						</div><!-- /.row -->
+					</div><!-- /.page-content -->
+				</div><!-- /.main-content -->
+			</div><!-- /.main-container-inner -->
+		</div><!-- /.main-container -->
+
+		{{include 'admin/public/footer.art'}}
+	
+</body>
+</html>

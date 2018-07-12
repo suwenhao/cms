@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		{{include 'admin/public/header.art'}}
+	</head>
+	<body>
+		<div class="navbar navbar-default" id="navbar">
+			<script type="text/javascript">
+				try{ace.settings.check('navbar' , 'fixed')}catch(e){}
+			</script>
+			{{include 'admin/public/nav_top.art'}}
+		</div>
+
+		<div class="main-container" id="main-container">
+			<script type="text/javascript">
+				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+			</script>
+
+			<div class="main-container-inner">
+				<a class="menu-toggler" id="menu-toggler" href="#">
+					<span class="menu-text"></span>
+				</a>
+
+				{{include 'admin/public/nav_left.art'}}
+
+				<div class="main-content">
+					<div class="breadcrumbs" id="breadcrumbs">
+						<script type="text/javascript">
+							try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+						</script>
+
+						<ul class="breadcrumb">
+							<li>
+								<i class="icon-home home-icon"></i>
+								<a href="{{__HOST__}}/admin">首页</a>
+							</li>
+							<li class="active">管理员列表</li>
+						</ul><!-- .breadcrumb -->
+
+						<div class="nav-search" id="nav-search">
+							<form class="form-search">
+								<span class="input-icon">
+									<input type="text" placeholder="搜索" class="nav-search-input" id="nav-search-input" autocomplete="off" />
+									<i class="icon-search nav-search-icon"></i>
+								</span>
+							</form>
+						</div><!-- #nav-search -->
+					</div>
+
+					<div class="page-content">
+						<div class="page-header">
+							<h1>
+								管理员列表								
+							</h1>
+						</div><!-- /.page-header -->
+						<!--表格-->
+						<div class="table-responsive">
+							<table id="sample-table-1" class="table table-striped table-bordered table-hover center">
+								<thead>
+									<tr>
+										<th class="center">管理员</th>
+										<th class="center">
+											<i class="icon-time bigger-110 hidden-480"></i>
+											最后登录时间
+										</th>
+										<th class="center">状态</th>
+
+										<th width="80px;" class="center">操作</th>
+									</tr>
+								</thead>
+
+								<tbody>
+									{{each list}}
+									<tr>
+										<td>{{$value.username}}</td>
+										<td>{{$value.login_time | dateFormat}}</td>
+										<td>
+											{{if $value.status=='1'}}
+											<button data-id="{{@$value._id}}" class="btn btn-xs btn-success btn-status">
+												<i class="icon-ok bigger-120"></i>
+											</button>
+											{{else if $value.status=='0'}}
+											<button data-id="{{@$value._id}}" class="btn btn-xs btn-danger btn-status">
+												<i class="icon-remove bigger-130"></i>
+											</button>
+											{{/if}}
+										</td>
+										<td>
+											<div class="btn-group center">
+												<button onclick="location.href='{{__HOST__}}/admin/manage/edit/{{@$value._id}}'" class="btn btn-xs btn-info">
+													<i class="icon-edit bigger-120"></i>
+												</button>
+												&nbsp;
+												<button data-id="{{@$value._id}}" class="btn btn-xs btn-danger remove">
+													<i class="icon-trash bigger-120"></i>
+												</button>
+											</div>
+										</td>
+									</tr>
+									{{/each}}
+								</tbody>
+							</table>
+						</div>
+
+					</div>
+				</div><!-- /.main-content -->
+			
+			</div><!-- /.main-container-inner -->
+
+			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+				<i class="icon-double-angle-up icon-only bigger-110"></i>
+			</a>
+		</div><!-- /.main-container -->
+
+
+		{{include 'admin/public/footer.art'}}
+
+		<script type="text/javascript">
+			(function($){
+				/**
+				 * 
+				 * @class List
+				*/
+				function List(){}
+				/**
+				 * 
+				 * @method init 初始化
+				*/
+				List.prototype.init=function(){
+					this.bindEvent()
+				}
+				/**
+				 * 
+				 * @method bindEvent dom操作
+				*/
+				List.prototype.bindEvent=function(){
+					//改变状态
+					$('.btn-status').click(function(){
+						var $this=$(this);
+						var id=$(this).attr('data-id')
+						//changeStatus 此函数封装在basic.js中
+						changeStatus('manage','status',id,function(res){
+							if(res.code===0){
+								if(res.data.status===1){
+									$this.removeClass('btn-danger').addClass('btn-success')
+									.children('i').removeClass('icon-remove').addClass('icon-ok')
+								}else{
+									$this.removeClass('btn-success').addClass('btn-danger')
+									.children('i').removeClass('icon-ok').addClass('icon-remove')
+								}
+							}else{
+								layer.msg(res.msg,{icon: 2})
+							}
+						})
+					})
+					//删除
+					$('.remove').click(function(){
+						var id=$(this).attr('data-id');
+						var $this=$(this);
+						layer.confirm('是否删除该管理员？', {
+							'title':'警告',
+							btn: ['确定','取消'] //按钮
+						}, function(){
+							//此函数封装在basic.js中
+							publicRemove('manage',id,function(res){
+								if(res.code===0){
+									layer.msg(res.msg,{icon:1})
+									$this.parent('.btn-group').parent('td').parent('tr').remove()
+								}else{
+									layer.msg(res.msg,{icon:2})
+								}
+							})
+						}, function(){
+							return true;
+						});
+					})
+					$('table th input:checkbox').on('click' , function(){
+						var that = this;
+						$(this).closest('table').find('tr > td:first-child input:checkbox')
+						.each(function(){
+							this.checked = that.checked;
+							$(this).closest('tr').toggleClass('selected');
+						});
+							
+					});
+					$('[data-rel="tooltip"]').tooltip({placement: function(context, source) {
+						var $source = $(source);
+						var $parent = $source.closest('table')
+						var off1 = $parent.offset();
+						var w1 = $parent.width();
+				
+						var off2 = $source.offset();
+						var w2 = $source.width();
+				
+						if( parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2) ) return 'right';
+						return 'left';
+					}});
+				}
+				//初始化
+				new List().init()
+			})(jQuery)
+		</script>
+	
+</body>
+</html>
+

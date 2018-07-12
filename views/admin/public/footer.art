@@ -1,0 +1,41 @@
+<!--[if !IE]> -->
+<script type="text/javascript">
+    window.jQuery || document.write("<script src='{{__HOST__}}/admin/js/jquery-2.0.3.min.js'>"+"<"+"script>");
+</script>
+<!-- <![endif]-->
+
+<!--[if IE]>
+<script type="text/javascript">
+    window.jQuery || document.write("<script src='{{__HOST__}}/admin/js/jquery-1.10.2.min.js'>"+"<"+"script>");
+</script>
+<![endif]-->
+
+<script type="text/javascript">
+    if("ontouchend" in document) document.write("<script src='{{__HOST__}}/admin/js/jquery.mobile.custom.min.js'>"+"<"+"script>");
+</script>
+<script src="{{__HOST__}}/admin/js/bootstrap.min.js"></script>
+
+<!-- ace scripts -->	
+<script src="{{__HOST__}}/admin/js/ace-elements.min.js"></script>
+<script src="{{__HOST__}}/admin/js/ace.min.js"></script>
+<script src="{{__HOST__}}/admin/js/layer/layer.js"></script>
+<script src="{{__HOST__}}/admin/js/underscore.min.js"></script>
+<script src="{{__HOST__}}/admin/js/zTree/js/jquery.ztree.core.js"></script>
+<script>
+    $('#logout').click(function(){
+        var $this=$(this)
+        layer.confirm('是否退出登录？', {
+            'title':'警告',
+            btn: ['确定','取消'] //按钮
+        }, function(){
+            var href=$this.attr('data-href');
+            location.href=href;
+        }, function(){
+            return true
+        });
+    })
+</script>
+<script>
+    var __HOST__=window.__HOST__="{{__HOST__}}";
+</script>
+<script src="{{__HOST__}}/admin/basic.js"></script>

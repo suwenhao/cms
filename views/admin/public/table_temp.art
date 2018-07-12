@@ -1,0 +1,29 @@
+{{each list}}
+    <input type="hidden" value="{{$value.temp=temp+1}}">
+    <tr>
+        <td class="align-left hidden-480" style="padding-left:{{(temp+1)*30}}px;">{{$value.title}}</td>
+        <td class="hidden-480">
+            {{if $value.status=='1'}}
+            <button data-id="{{@$value._id}}" class="btn btn-xs btn-success btn-status">
+                <i class="icon-ok bigger-120"></i>
+            </button>
+            {{else if $value.status=='0'}}
+            <button data-id="{{@$value._id}}" class="btn btn-xs btn-danger btn-status">
+                <i class="icon-remove bigger-130"></i>
+            </button>
+            {{/if}}
+        </td>
+        <td>
+            <div class="btn-group center">
+                <button onclick="location.href='{{__HOST__}}/admin/articlecate/edit/{{@$value._id}}'" class="btn btn-xs btn-info">
+                    <i class="icon-edit bigger-120"></i>
+                </button>
+                &nbsp;
+                <button data-id="{{@$value._id}}" class="btn btn-xs btn-danger remove">
+                    <i class="icon-trash bigger-120"></i>
+                </button>
+            </div>
+        </td>
+    </tr>
+    {{include 'admin/public/table_temp.art' $value temp}}
+{{/each}}

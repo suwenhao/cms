@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>后台管理系统登录</title>		
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<!-- basic styles -->
+
+		<link href="{{__HOST__}}/admin/css/bootstrap.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="{{__HOST__}}/admin/css/font-awesome.min.css" />
+
+		<!-- fonts -->
+		<link rel="stylesheet" href="{{__HOST__}}/admin/css/ace.min.css" />
+		<link rel="stylesheet" href="{{__HOST__}}/admin/css/ace-rtl.min.css" />
+		<style type="text/css">
+			.login-layout{
+				background: #428bca;
+			}
+			.login-layout .widget-box{
+				background-color:#428bca;
+			}
+			.login-layout .widget-box .widget-main{
+				padding:26px 16px;
+			}
+			.login-container{
+				padding-top: 80px;
+			}
+			.header{
+				margin-top:0px;
+				padding-bottom: 12px;
+			}
+		</style>
+	</head>
+
+	<body class="login-layout">
+		<div class="main-container">
+			<div class="main-content">
+				<div class="row">
+					<div class="col-sm-10 col-sm-offset-1">
+						<div class="login-container">
+							<div class="position-relative">
+								<div id="login-box" class="login-box visible widget-box no-border">
+									<div class="widget-body">
+										<div class="widget-main">
+											
+											<h2 class="header blue lighter bigger center">
+												CMS内容管理系统
+												
+											</h2>
+
+											<div class="space-6"></div>
+
+											<form>
+												<fieldset>
+													<label class="block clearfix">
+														<span class="block input-icon input-icon-right">
+															<input type="text" id="username" class="form-control" placeholder="用户名" />
+															<i class="icon-user"></i>
+														</span>
+													</label>
+
+													<label class="block clearfix">
+														<span class="block input-icon input-icon-right">
+															<input type="password" id="password" class="form-control" placeholder="密码" />
+															<i class="icon-lock"></i>
+														</span>
+													</label>
+
+													<label class="block clearfix">
+														<span class="block input-icon input-icon-right">
+															<input type="text" id="code" class="form-control" placeholder="验证吗" style="width:200px;float:left;" />
+															<img id="captcha" style="float:right;" src="{{__HOST__}}/admin/login/code">
+														</span>
+													</label>
+
+													<div class="space"></div>
+
+													<div class="clearfix">
+														<label class="inline">
+															<input type="checkbox" class="ace" />
+															<span class="lbl">记住密码</span>
+														</label>
+
+														<button id="submit" type="button" class="width-35 pull-right btn btn-sm btn-primary">
+															<i class="icon-key"></i>
+															登录
+														</button>
+													</div>
+
+													<div class="space-4"></div>
+												</fieldset>
+											</form>
+										</div><!-- /widget-main -->
+									</div><!-- /widget-body -->
+								</div><!-- /login-box -->
+							
+							</div><!-- /position-relative -->
+						</div>
+					</div><!-- /.col -->
+				</div><!-- /.row -->
+			</div>
+		</div><!-- /.main-container -->
+		{{include 'admin/public/footer.art'}}
+
+		<script>
+			var postapi="{{__HOST__}}/admin/login/dologin";
+			var captchaapi="{{__HOST__}}/admin/login/code";
+			(function($){
+				function Login(){}
+				Login.prototype.init=function(){
+					this.bindEvent()
+				}
+				Login.prototype.bindEvent=function(){
+					$('#captcha').click(function(){
+						$(this).attr('src',captchaapi+'?t='+Math.random()*1000)
+					})
+					$('#submit').click(function(){
+						var username=$('#username').val()
+						var password=$('#password').val()
+						var code=$('#code').val()
+						if(username===""){
+							layer.msg('请输入用户名!',{icon:2});
+							$('#username').focus()
+						}else if(password===""){
+							layer.msg('请输入密码!',{icon:2});
+							$('#password').focus()
+						}else if(code===""){
+							layer.msg('请输入验证码!',{icon:2});
+							$('#code').focus()
+						}else{
+							//此函数封装在basic.js中
+							postSubmit(postapi,{
+								username:username,
+								password:password,
+								code:code
+							},function(res){
+								if(res.code===0){
+									layer.msg(res.msg,{icon:1});
+									setTimeout(function(){
+										location.href='{{__HOST__}}/admin'
+									},1000)
+								}else{
+									layer.msg(res.msg,{icon:2});
+								}
+							})
+						}
+					})
+				}
+				//初始化
+				new Login().init()
+			})(jQuery)
+		</script>
+</body>
+</html>
