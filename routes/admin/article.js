@@ -89,7 +89,7 @@ router.post('/doadd',util.upload().single('pic'),async (ctx)=>{
         is_hot:0,
         add_time:new Date().getTime(),
         count:0,
-        img_url:file?file.path.replace(/statics\\/,'').replace(/\\/g,'/'):'uploads/default/cover.png',
+        img_url:file?file.path.replace(/statics\\/,'').replace(/\\/g,'/'):'uploads/default/cover.jpg',
         sort:sort,
         content:ueditor,
         title,author,status,cid,catename,keywords,description

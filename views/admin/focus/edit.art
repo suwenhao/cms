@@ -35,7 +35,7 @@
 								<i class="icon-home home-icon"></i>
 								<a href="{{__HOST__}}/admin">首页</a>
 							</li>
-							<li class="active">增加轮播图</li>
+							<li class="active">修改轮播图</li>
 						</ul><!-- .breadcrumb -->
 					</div>
 
@@ -43,7 +43,7 @@
 
 						<div class="page-header">
 							<h1>
-								增加轮播图								
+								修改轮播图								
 							</h1>
 						</div><!-- /.page-header -->
 
@@ -141,21 +141,21 @@
 			(function(){
 				/**
 				 * 
-				 * @class FocusAdd 
+				 * @class FocusEdit 
 				*/
-				function FocusAdd(){}
+				function FocusEdit(){}
 				/**
 				 * 
 				 * @method init 初始化
 				*/
-				FocusAdd.prototype.init=function(){
+				FocusEdit.prototype.init=function(){
 					this.bindEvent()
 				}
 				/**
 				 * 
 				 * @method bindEvent 绑定dom操作
 				*/
-				FocusAdd.prototype.bindEvent=function(){
+				FocusEdit.prototype.bindEvent=function(){
 					//图片选择
 					$('#pic').change(function(){
 						var file = this.files[0];
@@ -180,8 +180,6 @@
 							layer.msg('请输入标题',{icon:2})
 						}else if(url==""){
 							layer.msg('请输入链接',{icon:2})
-						}else if(pic==""){
-							layer.msg('请输入选择图片',{icon:2})
 						}else{
 							var formData=new FormData()
 							formData.append("title",title);
@@ -215,7 +213,7 @@
 					})
 				}
 				//初始化
-				new FocusAdd().init()
+				new FocusEdit().init()
 			})()
 		</script>
 </body>

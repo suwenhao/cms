@@ -1,11 +1,11 @@
 const router = require('koa-router')();
-const Focus = require('../../model/Focus.js')
+const Link = require('../../model/Link.js')
 const sd = require('silly-datetime')
 const util = require('../../model/util.js')
 
 router.get('/', async (ctx)=>{
-    var result = await Focus.find({}).sort({add_time:1}).lean();
-    await ctx.render('admin/focus/list',{
+    var result = await Link.find({}).sort({add_time:1}).lean();
+    await ctx.render('admin/link/list',{
         list:result.map(v=>{
             return {
                 ...v,
@@ -16,7 +16,7 @@ router.get('/', async (ctx)=>{
 })
 
 router.get('/add', async (ctx)=>{
-    await ctx.render('admin/focus/add')
+    await ctx.render('admin/link/add')
 })
 
 router.get('/getdata', async (ctx)=>{
@@ -29,8 +29,8 @@ router.get('/getdata', async (ctx)=>{
     }
     var skip=(page-1)*pagesize;
     var limit=parseInt(pagesize);
-    let alldata=await Focus.find({});
-    let data=await Focus.find({}).sort({'add_time':-1}).skip(skip).limit(limit).lean();
+    let alldata=await Link.find({});
+    let data=await Link.find({}).sort({'add_time':-1}).skip(skip).limit(limit).lean();
     ctx.body={
         msg:'获取数据成功',
         code:0,
@@ -55,19 +55,19 @@ router.post('/doadd',util.upload().single('pic'), async (ctx)=>{
         status,
         url,
         add_time:new Date().getTime(),
-        pic:file?file.path.replace(/statics\\/,'').replace(/\\/g,'/'):'uploads/default/focus.jpg',
+        pic:file?file.path.replace(/statics\\/,'').replace(/\\/g,'/'):'uploads/default/link.jpg',
         sort:newsort
     }
-    let result = await Focus.create(obj);
+    let result = await Link.create(obj);
     if(result){
         ctx.body={
             code:0,
-            msg:'增加轮播图成功'
+            msg:'增加友情链接成功'
         }
     }else{
         ctx.body={
             code:1,
-            msg:'增加轮播图失败'
+            msg:'增加友情链接失败'
         }
     }
 })
@@ -75,8 +75,8 @@ router.post('/doadd',util.upload().single('pic'), async (ctx)=>{
 router.get('/edit/:id', async (ctx)=>{
     let id = ctx.params.id;
     try {
-        let data = await Focus.findOne({_id:id}).lean()
-        await ctx.render('admin/focus/edit',{
+        let data = await Link.findOne({_id:id}).lean()
+        await ctx.render('admin/link/edit',{
             data:{
                 ...data,
                 pic:data.pic.replace(/statics\//,'')
@@ -96,22 +96,22 @@ router.post('/doedit',util.upload().single('pic'), async (ctx)=>{
         status,
         sort
     }
-    let data = await Focus.update({_id:id},{$set:obj});
+    let data = await Link.update({_id:id},{$set:obj});
     if(data){
         ctx.body={
             code:0,
-            msg:'修改轮播图成功'
+            msg:'修改友情链接成功'
         }
     }else{
         ctx.body={
             code:1,
-            msg:'修改轮播图失败'
+            msg:'修改友情链接失败'
         }
     }
 })
 router.post('/changeSort',async(ctx)=>{
     let {id,sort} = ctx.request.body
-    let data = await Focus.update({_id:id},{$set:{sort}});
+    let data = await Link.update({_id:id},{$set:{sort}});
     if(data){
         ctx.body={
             code:0,
