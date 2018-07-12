@@ -69,6 +69,7 @@
 									<tr>
 										<th class="center">标题</th>
 										<th class="center" width="80px;">图片</th>
+										<th class="center">链接地址</th>
 										<th class="center" width="80px;">排序</th>
 										<th class="center" width="80px;">状态</th>
 										<th width="80px;" class="center">操作</th>
@@ -99,6 +100,7 @@
 			<tr>
 				<td><&=title&></td>
 				<td><img width="50" src="{{__HOST__}}/<&=pic&>" title="<&=title&>" alt="<&=title&>"></td>
+				<td><&=url&></td>
 				<td><input type="number" data-id="<&-_id&>" value="<&=sort&>" class="sort_input"/></td>
 				<td>
 					<& if(status=='1'){&>

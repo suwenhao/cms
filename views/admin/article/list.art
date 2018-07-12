@@ -227,6 +227,71 @@
 		{{include 'admin/public/footer.art'}}
 		<script type="text/javascript" src="{{__HOST__}}/admin/js/jqPagination/js/pagination.min.js"></script>
 		<script type="text/javascript" src="{{__HOST__}}/admin/js/select2/select2.js"></script>
+		<script type="text/template" id="tpl">
+			<tr>
+				<td><&=title&></td>
+				<td><&=catename&></td>
+				<td><&=add_time&></td>
+				<td>
+					<input type="number" data-id="<&-_id&>" value="<&=sort&>" class="sort_input"/>
+				</td>
+				<td>
+					<& if(is_hot==1) {&>
+						<button data-id="<&-_id&>" class="btn btn-xs btn-success btn-hot">
+							<i class="icon-ok bigger-120"></i>
+						</button>
+					<& }else{ &>
+						<button data-id="<&-_id&>" class="btn btn-xs btn-danger btn-hot">
+							<i class="icon-remove bigger-130"></i>
+						</button>
+					<&}&>
+				</td>
+				<td>
+					<& if(is_best==1) {&>
+						<button data-id="<&-_id&>" class="btn btn-xs btn-success btn-best">
+							<i class="icon-ok bigger-120"></i>
+						</button>
+					<& }else{ &>
+						<button data-id="<&-_id&>" class="btn btn-xs btn-danger btn-best">
+							<i class="icon-remove bigger-130"></i>
+						</button>
+					<&}&>
+				</td>
+				<td>
+					<& if(is_new==1) {&>
+						<button data-id="<&-_id&>" class="btn btn-xs btn-success btn-new">
+							<i class="icon-ok bigger-120"></i>
+						</button>
+					<& }else{ &>
+						<button data-id="<&-_id&>" class="btn btn-xs btn-danger btn-new">
+							<i class="icon-remove bigger-130"></i>
+						</button>
+					<&}&>
+				</td>
+				<td>
+					<& if(status==1) {&>
+						<button data-id="<&-_id&>" class="btn btn-xs btn-success btn-status">
+							<i class="icon-ok bigger-120"></i>
+						</button>
+					<& }else{ &>
+						<button data-id="<&-_id&>" class="btn btn-xs btn-danger btn-status">
+							<i class="icon-remove bigger-130"></i>
+						</button>
+					<&}&>
+				</td>
+				<td>
+					<div class="btn-group center">
+						<button  data-id="<&-_id&>" class="btn btn-xs btn-info btn-edit">
+							<i class="icon-edit bigger-120"></i>
+						</button>
+						&nbsp;
+						<button data-id="<&-_id&>" class="btn btn-xs btn-danger remove">
+							<i class="icon-trash bigger-120"></i>
+						</button>
+					</div>
+				</td>
+			</tr>
+		</script>
 		<script type="text/javascript">
 			(function($){
 				/**
@@ -393,69 +458,8 @@
 				List.prototype.getHtml=function(list){
 						var str='';
 						for(var i=0;i<list.length;i++){
-							str+='<tr>';
-								str+='<td>'+list[i].title+'</td>';
-								str+='<td>'+list[i].catename+'</td>';
-								str+='<td>'+list[i].add_time+'</td>';
-								str+='<td>';
-									str+='<input type="number" data-id="'+list[i]._id+'" value="'+list[i].sort+'" class="sort_input"/>';
-								str+='</td>';
-								str+='<td>';
-									if(list[i].is_hot==1){
-										str+='<button data-id="'+list[i]._id+'" class="btn btn-xs btn-success btn-hot">';
-											str+='<i class="icon-ok bigger-120"></i>';
-										str+='</button>';
-									}else{
-										str+='<button data-id="'+list[i]._id+'" class="btn btn-xs btn-danger btn-hot">';
-											str+='<i class="icon-remove bigger-130"></i>';
-										str+='</button>';
-									}
-								str+='</td>';
-								str+='<td>';
-									if(list[i].is_best==1){
-										str+='<button data-id="'+list[i]._id+'" class="btn btn-xs btn-success btn-best">';
-												str+='<i class="icon-ok bigger-120"></i>';
-										str+='</button>';
-									}else{
-										str+='<button data-id="'+list[i]._id+'" class="btn btn-xs btn-danger btn-best">';
-											str+='<i class="icon-remove bigger-130"></i>';
-										str+='</button>';
-									}
-								str+='</td>';
-								str+='<td>';
-									if(list[i].is_new==1){
-										str+='<button data-id="'+list[i]._id+'" class="btn btn-xs btn-success btn-new">';
-												str+='<i class="icon-ok bigger-120"></i>';
-										str+='</button>';
-									}else{
-										str+='<button data-id="'+list[i]._id+'" class="btn btn-xs btn-danger btn-new">';
-											str+='<i class="icon-remove bigger-130"></i>';
-										str+='</button>';
-									}
-								str+='</td>';
-								str+='<td>';
-									if(list[i].status==1){
-										str+='<button data-id="'+list[i]._id+'" class="btn btn-xs btn-success btn-status">';
-												str+='<i class="icon-ok bigger-120"></i>';
-										str+='</button>';
-									}else{
-										str+='<button data-id="'+list[i]._id+'" class="btn btn-xs btn-danger btn-status">';
-												str+='<i class="icon-remove bigger-130"></i>';
-										str+='</button>';
-									}
-								str+='</td>';
-								str+='<td>';
-									str+='<div class="btn-group center">';
-										str+='<button  data-id="'+list[i]._id+'" class="btn btn-xs btn-info btn-edit">';
-											str+='<i class="icon-edit bigger-120"></i>';
-										str+='</button>';
-										str+='&nbsp;';
-										str+='<button data-id="'+list[i]._id+'" class="btn btn-xs btn-danger remove">';
-											str+='<i class="icon-trash bigger-120"></i>';
-										str+='</button>';
-									str+='</div>';
-								str+='</td>';
-							str+='</tr>';
+							var template=_.template($('#tpl').html())
+							str+=template(list[i])
 						}
 						return str;
 					}
