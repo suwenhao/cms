@@ -2,7 +2,6 @@
 <html lang="en">
 	<head>
 		{{include 'admin/public/header.art'}}
-		<link rel="stylesheet" href="{{__HOST__}}/admin/js/jqPagination/css/pagination.css">
 		<style>
 			.sort_input{
 				width:60px;
@@ -43,14 +42,14 @@
 								<i class="icon-home home-icon"></i>
 								<a href="{{__HOST__}}/admin">首页</a>
 							</li>
-							<li class="active">友情链接列表</li>
+							<li class="active">导航列表</li>
 						</ul><!-- .breadcrumb -->
 					</div>
 
 					<div class="page-content">
 						<div class="page-header">
 							<h1>
-								友情链接列表
+								导航列表
 							</h1>
 						</div><!-- /.page-header -->
 						<!--表格-->
@@ -59,7 +58,6 @@
 								<thead>
 									<tr>
 										<th class="center">标题</th>
-										<th class="center" width="80px;">图片</th>
 										<th class="center">链接地址</th>
 										<th class="center" width="80px;">排序</th>
 										<th class="center" width="80px;">状态</th>
@@ -71,9 +69,6 @@
 								</tbody>
 							</table>
 						</div>
-						<div class="page">
-							<div id="pagination" style="float:right;"></div>
-						</div>
 					</div>
 				</div><!-- /.main-content -->
 			
@@ -84,13 +79,10 @@
 			</a>
 		</div><!-- /.main-container -->
 
-
 		{{include 'admin/public/footer.art'}}
-		<script type="text/javascript" src="{{__HOST__}}/admin/js/jqPagination/js/pagination.min.js"></script>
 		<script type="text/template" id="tpl">
 			<tr>
 				<td><&=title&></td>
-				<td><img width="50" src="{{__HOST__}}/<&=pic&>" title="<&=title&>" alt="<&=title&>"></td>
 				<td><&=url&></td>
 				<td><input type="number" data-id="<&-_id&>" value="<&=sort&>" class="sort_input"/></td>
 				<td>
@@ -106,7 +98,7 @@
 				</td>
 				<td>
 					<div class="btn-group center">
-						<button onclick="location.href='{{__HOST__}}/admin/link/edit/<&-_id&>'" class="btn btn-xs btn-info">
+						<button onclick="location.href='{{__HOST__}}/admin/nav/edit/<&-_id&>'" class="btn btn-xs btn-info">
 							<i class="icon-edit bigger-120"></i>
 						</button>
 						&nbsp;
@@ -125,7 +117,7 @@
 				*/
 				function List(){
 					this.page=1;
-					this.pagesize=5;
+					this.pagesize=1000
 					this.totalSize=0;
 				}
 				/**
@@ -144,7 +136,7 @@
 				*/
 				List.prototype.getData=function(cb){
 					var self=this
-					var url="{{__HOST__}}/admin/link/getdata"
+					var url="{{__HOST__}}/admin/nav/getdata"
 					getSubmit(url,self.getfilter(),function(res){
 						if(res.code===0){
 							if(res.list.length>0){
@@ -159,7 +151,6 @@
 							self.updateEvent()
 							//设置过滤
 							self.setFilter(res);
-							$("#pagination").whjPaging("setPage", {currPage: self.page, totalPage: Math.ceil(self.totalSize/self.pagesize), totalSize: self.totalSize});
 							cb&&cb()
 						}
 					})
@@ -206,7 +197,7 @@
 							layer.msg('不能为空',{icon:2})
 							$(this).focus()
 						}else{
-							var url = "{{__HOST__}}/admin/link/changeSort";
+							var url = "{{__HOST__}}/admin/nav/changeSort";
 							postSubmit(url,{id:id,sort:parseInt(val)},function(res){
 								console.log(res.msg)
 							})
@@ -217,7 +208,7 @@
 						var $this=$(this);
 						var id=$(this).attr('data-id')
 						//changeStatus 此函数封装在basic.js中
-						changeStatus('link','status',id,function(res){
+						changeStatus('nav','status',id,function(res){
 							if(res.code===0){
 								if(res.data.status===1){
 									$this.removeClass('btn-danger').addClass('btn-success')
@@ -240,7 +231,7 @@
 							btn: ['确定','取消'] //按钮
 						}, function(){
 							//此函数封装在basic.js中
-							publicRemove('link',id,function(res){
+							publicRemove('nav',id,function(res){
 								if(res.code===0){
 									layer.msg(res.msg,{icon:1})
 									$this.parent('.btn-group').parent('td').parent('tr').remove()
@@ -259,24 +250,6 @@
 				*/
 				List.prototype.bindEvent=function(cb){
 					var self = this
-					//分页初始化
-					$("#pagination").whjPaging({
-						totalSize: self.totalSize,
-						pageSizeOpt: [
-							{value: 5, text: '5条/页',selected:true},
-							{value: 10, text: '10条/页'},
-							{value: 20, text: '20条/页'},
-							{value: 50, text: '50条/页'}
-						],
-						isShowRefresh: true,
-						totalPage: Math.ceil(self.totalSize/self.pagesize),
-						callBack: function (currPage, pageSize) {
-							self.page=currPage;
-							self.pagesize=pageSize;
-							//分页改变加载数据
-							self.getData()
-						}
-					});
 					cb&&cb();
 					$('table th input:checkbox').on('click' , function(){
 						var that = this;

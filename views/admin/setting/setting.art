@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		{{include 'admin/public/header.art'}}
+		<link rel="stylesheet" href="{{__HOST__}}/admin/css/util.css">
+	</head>
+	<body>
+		<div class="navbar navbar-default" id="navbar">
+			<script type="text/javascript">
+				try{ace.settings.check('navbar' , 'fixed')}catch(e){}
+			</script>
+			{{include 'admin/public/nav_top.art'}}
+		</div>
+
+		<div class="main-container" id="main-container">
+			<script type="text/javascript">
+				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+			</script>
+
+			<div class="main-container-inner">
+				<a class="menu-toggler" id="menu-toggler" href="#">
+					<span class="menu-text"></span>
+				</a>
+
+				{{include 'admin/public/nav_left.art'}}
+
+				<div class="main-content">
+					<div class="breadcrumbs" id="breadcrumbs">
+						<script type="text/javascript">
+							try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+						</script>
+
+						<ul class="breadcrumb">
+							<li>
+								<i class="icon-home home-icon"></i>
+								<a href="{{__HOST__}}/admin">首页</a>
+							</li>
+							<li class="active">修改内容</li>
+						</ul><!-- .breadcrumb -->
+					</div>
+					<div class="page-content">
+						<div class="page-header">
+							<h1>
+								修改内容								
+							</h1>
+						</div><!-- /.page-header -->
+						<ul class="nav nav-tabs" id="myTab" style="height: 34px;">
+							<li class="active">
+								<a data-toggle="tab" href="#faq-tab-1">
+									基本设置
+								</a>
+							</li>
+							<li>
+								<a data-toggle="tab" href="#faq-tab-2">
+									内容设置
+								</a>
+							</li>
+							<li>
+								<a data-toggle="tab" href="#faq-tab-3">
+									SEO设置
+								</a>
+							</li>
+						</ul>
+						<div class="tab-content no-border">
+							<div id="faq-tab-1" class="tab-pane fade in active">
+								<form class="form" role="form">
+									<div class="form-group">
+										<label class="col-sm-2 control-label no-padding-right" for="cate">所属分类<span style="color:red;">*</span>:</label>
+										<div class="col-sm-10" id="box-cate">
+											<div class="col-xs-12 col-sm-6">
+												<div class="input-group">
+													<input type="hidden" id="cate" value="{{data.cid}}">
+													<input type="text" value="{{data.catename}}" class="form-control" id="cate-input">
+													<span class="input-group-addon" id="cate-icon">
+														<i class="fa fa-search bigger-110"></i>
+													</span>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label no-padding-right" for="title">文章标题<span style="color:red;">*</span>:</label>
+										<div class="col-sm-10">
+											<div class="col-xs-12 col-sm-6">
+												<div class="input-group">
+													<input type="text" id="title"  value="{{data.title}}" placeholder="输入标题" class="form-control">
+												</div>
+											</div>	
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label no-padding-right" for="file">封面图<span style="color:red;">*</span>:</label>
+										<div class="col-sm-10">
+											<div class="col-xs-12 col-sm-6">
+												<label class="ace-file-input">
+													<input  accept="image/*" type="file" id="pic">
+													<span class="ace-file-container" data-title="选择">
+														<span class="ace-file-name" data-title="没图片">
+															<i class="ace-icon fa fa-picture-o file-image"></i>
+														</span>
+													</span>
+													<a class="remove" href="#">
+														<i class=" ace-icon fa fa-times"></i>
+													</a>
+												</label>
+												<div>
+													<img width="200" src="{{__HOST__}}/{{data.img_url}}">
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label no-padding-right" for="author">作者<span style="color:red;">*</span>:</label>
+										<div class="col-sm-10">
+											<div class="col-xs-12 col-sm-6">
+												<div class="input-group">
+													<input type="text" id="author" value="{{data.author}}"  placeholder="输入作者" class="form-control">
+												</div>
+											</div>	
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label no-padding-right" for="username">审核状态:</label>
+										<div class="col-sm-10">
+											<div class="radio"  style="float:left;">
+												<label>
+													<input {{ if data.status==1}} checked {{/if}} name="form-field-radio" value="1" type="radio" class="ace form-field-radio">
+													<span class="lbl"> 审核</span>
+												</label>
+											</div>
+											<div class="radio" style="float:left;">
+												<label>
+													<input {{ if data.status===0}} checked {{/if}} name="form-field-radio" type="radio" value="0" class="ace form-field-radio">
+													<span class="lbl"> 未审核</span>
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label no-padding-right" for="username">加入推荐:</label>
+										<div class="col-sm-10">
+											<div class="checkbox">
+												<label>
+													<input {{ if data.is_best==1}} checked {{/if}} name="form-field-checkbox"  value="best" type="checkbox" class="ace form-field-checkbox">
+													<span class="lbl">精品</span>
+												</label>
+											</div>
+											<div class="checkbox">
+												<label>
+													<input {{ if data.is_hot==1}} checked {{/if}} name="form-field-checkbox"  value="hot" type="checkbox" class="ace form-field-checkbox">
+													<span class="lbl">热门</span>
+												</label>
+											</div>
+											<div class="checkbox">
+												<label>
+													<input {{ if data.is_new==1}} checked {{/if}} name="form-field-checkbox"  value="new" type="checkbox" class="ace form-field-checkbox">
+													<span class="lbl">新品</span>
+												</label>
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
+							<div id="faq-tab-2" class="tab-pane fade">
+								<form class="form" role="form">
+									<div class="form-group" style="height:auto;">
+										<label class="col-sm-2 control-label no-padding-right" for="description">文章内容:</label>
+										<div class="col-sm-10 col-xs-12">
+											<div class="col-xs-12 col-sm-12">
+												<div class="input-group">
+													<script id="editor" type="text/plain" style="width:100%;height:300px;"></script>
+												</div>
+											</div>
+										</div>
+									</div>									
+								</form>
+							</div>
+							<div id="faq-tab-3" class="tab-pane fade">
+								<form class="form" role="form">
+									<div class="form-group">
+										<label class="col-sm-2 control-label no-padding-right" for="keywords">关键字:</label>
+										<div class="col-sm-10">
+											<div class="col-xs-12 col-sm-6">
+												<div class="input-group">
+													<input type="text" id="keywords" value="{{data.keywords}}"  placeholder="输入关键字" class="form-control">
+												</div>
+											</div>	
+										</div>
+									</div>
+									<div class="form-group" style="height:auto;">
+										<label class="col-sm-2 control-label no-padding-right" for="description">描述:</label>
+										<div class="col-sm-10">
+											<div class="col-xs-12 col-sm-12">
+												<div class="input-group">
+													<textarea class="form-control" rows="5" id="description" placeholder="输入文章描述">{{data.description}}</textarea>
+												</div>
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+						<form class="form" style="margin-top:0;">
+							<div class="form-group">
+								<label class="col-sm-2 control-label no-padding-right"></label>
+								<div class="col-sm-10">
+									<div class="col-xs-10 col-sm-8">
+										<div class="input-group">
+											<button id="submit" type="button" class="btn btn-primary">提交</button>									
+										</div>
+									</div>
+								</div>
+							</div>
+						</form>
+						<div id="tree" class="ztree" style="display:none;padding:20px;"></div>
+					</div>
+				</div><!-- /.main-content -->
+			
+			</div><!-- /.main-container-inner -->
+
+			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+				<i class="icon-double-angle-up icon-only bigger-110"></i>
+			</a>
+		</div><!-- /.main-container -->
+		{{include 'admin/public/footer.art'}}
+		<script src="{{__HOST__}}/lib/ueditor/ueditor.config.js"></script>
+		<script src="{{__HOST__}}/lib/ueditor/ueditor.all.min.js"> </script>
+		<script src="{{__HOST__}}/lib/ueditor/lang/zh-cn/zh-cn.js"></script>
+		<script>
+			(function(){
+				/**
+				 * 
+				 * @class Article 
+				*/
+				function Article(){}
+				/**
+				 * 
+				 * @method init 初始化
+				*/
+				Article.prototype.init=function(){
+					var self = this
+					this.getCate(function(){
+						self.bindEvent()
+					})
+				}
+				/**
+				 * 
+				 * @method getCate 获取分类树
+				*/
+				Article.prototype.getCate=function(cb){
+					var self=this
+					var url="{{__HOST__}}/admin/articlecate/getcate"
+					//此函数封装在basic.js中
+					postSubmit(url,{pid:0},function(res){
+						if(res.code===0){
+							self.zTreeObj = $.fn.zTree.init($("#tree"), {
+								data:{
+									simpleData:{
+										enable: true,
+										idKey:'id',
+										pIdKey :'pid'
+									}
+								}
+							}, res.data);
+							self.zTreeObj.expandAll(true);
+							cb&&cb()
+						}else{
+							layer.msg(res.msg,{icon:2})
+						}
+					})
+				}
+				/**
+				 * 
+				 * @method bindEvent 绑定dom操作
+				*/
+				Article.prototype.bindEvent=function(){
+					var self = this
+					function changeCate(){
+						var node = self.zTreeObj.getNodeByParam("id", $('#cate').val());
+						self.zTreeObj.selectNode(node);
+                        layer.open({
+							type: 1,
+							title: '分类',
+							maxmin: true,
+							area: ['300px', '400px'],
+							btn: ['确定', '清除', '取消'],
+							content: $('#tree'),
+							yes: function(index, layero){
+								var selectNode=self.zTreeObj.getSelectedNodes();
+								console.log(selectNode)
+								if(selectNode.length>0){
+									$('#cate').val(selectNode[0].id)
+									$('#cate-input').val(selectNode[0].name)
+								}else{
+									$('#cate').val('')
+									$('#cate-input').val('')
+								}
+								return true
+							}
+							,btn2: function(index, layero){
+								self.zTreeObj.cancelSelectedNode()
+								return false
+							}
+							,btn3: function(index, layero){
+								return true
+							}
+						});
+					}
+					//点击上级分类
+					$('#cate-icon').click(function(){
+						$('#cate-input').blur()
+                        changeCate()
+					})
+					//点击上级分类
+                    $('#cate-input').focus(function(){
+						$('#cate-input').blur()
+                        changeCate()
+					})
+					//图片选择
+					$('#pic').change(function(){
+						var file = this.files[0];
+						$('.ace-file-name').attr('data-title',file.name);
+						$('.ace-file-container').addClass('selected');
+					})
+					//图片清除
+					$('.ace-file-input .remove').click(function(){
+						$('#pic').val('');
+						$('.ace-file-name').attr('data-title','没图片');
+						$('.ace-file-container').removeClass('selected');
+					})
+					//ueditor初始化
+					this.UE = UE.getEditor('editor');
+					this.UE.ready(function () {
+						// 监听插入图片
+						self.UE.addListener("uploadSuccess", function(file, response){
+							console.log(file, response)
+						});
+						self.UE.setContent('{{@data.content}}')
+					});
+					$('#submit').click(function(e){
+						e.preventDefault()
+						var title=$('#title').val().trim()
+						var pic = $('#pic')[0].files[0];
+						var cate = $('#cate').val();
+						var cateInput = $('#cate-input').val();
+						var status=$('.form-field-radio:checked').val()
+						var recommend=[]
+						$.each($('.form-field-checkbox:checked'),function(){
+							if(this.checked){
+								recommend.push($(this).val())
+							}
+						});
+						var ueditor=self.UE.getContent()
+						var author=$('#author').val().trim();
+						var keywords=$('#keywords').val().trim();
+						var description=$('#description').val().trim();
+
+						if(cate==""){
+							layer.msg('请选择分类',{icon:2})
+						}else if(title==""){
+							layer.msg('请输入标题',{icon:2})
+						}else if(author==""){
+							layer.msg('请输入作者',{icon:2})
+						}else{
+							var formData=new FormData()
+							formData.append('id',"{{@data._id}}")
+							formData.append("cid",cate);
+							formData.append("catename",cateInput);
+							formData.append("title",title);
+							formData.append("pic",pic);
+							formData.append("img_url","{{@data.img_url}}");
+							formData.append("author",author);
+							formData.append("status",parseInt(status));
+							formData.append("recommend",recommend);
+							formData.append('ueditor',ueditor)
+							formData.append('keywords',keywords)
+							formData.append('description',description)
+							$.ajax({
+								url: "{{__HOST__}}/admin/article/doedit",
+								data:  formData,
+								type: "post",
+								dataType: "json",
+								cache: false,//上传文件无需缓存
+								processData: false,//用于对data参数进行序列化处理 这里必须false
+								contentType: false, //必须
+								success: function (res) {
+									if(res.code==0){
+										layer.msg(res.msg,{icon:1})
+										setTimeout(function(){
+											location.href='{{__HOST__}}/admin/article'
+										},1000)
+									}else{
+										layer.msg(res.msg,{icon:2})
+									}
+								}
+							})
+						}
+					})
+				}
+				//初始化
+				new Article().init()
+			})()
+		</script>
+</body>
+</html>

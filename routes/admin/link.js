@@ -4,15 +4,7 @@ const sd = require('silly-datetime')
 const util = require('../../model/util.js')
 
 router.get('/', async (ctx)=>{
-    var result = await Link.find({}).sort({add_time:1}).lean();
-    await ctx.render('admin/link/list',{
-        list:result.map(v=>{
-            return {
-                ...v,
-                pic:v.pic.replace('statics/','')
-            }
-        })
-    })
+    await ctx.render('admin/link/list')
 })
 
 router.get('/add', async (ctx)=>{
@@ -89,12 +81,13 @@ router.get('/edit/:id', async (ctx)=>{
 router.post('/doedit',util.upload().single('pic'), async (ctx)=>{
     let file = ctx.req.file;
     let {title,status,url,sort,newpic,id} = ctx.req.body;
+    let newsort=sort||0;
     var obj={
         url,
         pic:file?file.path.replace(/statics\\/,'').replace(/\\/g,'/'):newpic,
         title,
         status,
-        sort
+        sort:newsort
     }
     let data = await Link.update({_id:id},{$set:obj});
     if(data){

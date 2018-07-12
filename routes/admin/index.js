@@ -4,6 +4,8 @@ const Articlecate = require('../../model/Articlecate.js');
 const Manage = require('../../model/Manage.js');
 const Focus = require('../../model/Focus.js');
 const Link = require('../../model/Link.js');
+const Nav = require('../../model/Nav.js');
+const Setting = require('../../model/Setting.js');
 const ueditor = require('koa2-ueditor')
 //引入子路由模块
 const mongodbModel={
@@ -11,7 +13,9 @@ const mongodbModel={
     'articlecate':Articlecate,
     'manage':Manage,
     'focus':Focus,
-    'link':Link
+    'link':Link,
+    'nav':Nav,
+    'setting':Setting
 }
 
 const login = require('./login.js');
@@ -20,6 +24,8 @@ const articlecate = require('./articlecate.js');
 const article = require('./article.js');
 const focus = require('./focus.js');
 const link = require('./link.js');
+const nav = require('./nav.js');
+const setting = require('./setting.js');
 const user = require('./user.js');
 
 
@@ -74,6 +80,8 @@ router.use('/articlecate',articlecate);
 router.use('/article',article);
 router.use('/focus',focus);
 router.use('/link',link);
+router.use('/nav',nav);
+router.use('/setting',setting);
 router.use('/user',user);
 
 router.all('/editor/controller', ueditor(['statics', {
