@@ -191,7 +191,7 @@
 							formData.append("newpic","{{data.pic}}");
 
 							$.ajax({
-								url: "{{__HOST__}}/admin/focus/doedit",
+								url: "{{__HOST__}}/admin/link/doedit",
 								data:  formData,
 								type: "post",
 								dataType: "json",
@@ -202,7 +202,7 @@
 									if(res.code==0){
 										layer.msg(res.msg,{icon:1})
 										setTimeout(function(){
-											location.href='{{__HOST__}}/admin/focus'
+											location.href='{{__HOST__}}/admin/link'
 										},1000)
 									}else{
 										layer.msg(res.msg,{icon:2})
