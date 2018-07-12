@@ -185,7 +185,7 @@
 							formData.append("url",url);
 							formData.append("status",parseInt(status));
 							formData.append("pic",pic);
-							formData.append("sort",parsrInt(sort));
+							formData.append("sort",parseInt(sort));
 
 							$.ajax({
 								url: "{{__HOST__}}/admin/focus/doadd",

@@ -188,7 +188,7 @@
 							formData.append("url",url);
 							formData.append("status",parseInt(status));
 							formData.append("pic",pic);
-							formData.append("sort",parsrInt(sort));
+							formData.append("sort",parseInt(sort));
 							formData.append("id","{{@data._id}}");
 							formData.append("newpic","{{data.pic}}");
 
