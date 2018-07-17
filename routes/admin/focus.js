@@ -1,3 +1,11 @@
+/*!
+ * Koa CMS Backstage management
+ *
+ * Copyright JS suwenhao
+ * Released under the ISC license
+ * Email swh1057607246@qq.com
+ *
+ */
 const router = require('koa-router')();
 const Focus = require('../../model/Focus.js')
 const sd = require('silly-datetime')
@@ -22,7 +30,7 @@ router.get('/getdata', async (ctx)=>{
     var skip=(page-1)*pagesize;
     var limit=parseInt(pagesize);
     let alldata=await Focus.find({});
-    let data=await Focus.find({}).sort({'add_time':-1}).skip(skip).limit(limit).lean();
+    let data=await Focus.find({}).sort({'add_time':1}).skip(skip).limit(limit).lean();
     ctx.body={
         msg:'获取数据成功',
         code:0,

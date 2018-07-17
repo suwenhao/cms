@@ -1,0 +1,109 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>新闻资讯</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="" />
+{{include 'default/public/header-lib.art'}}
+<script>
+ new WOW().init();
+</script>
+<!-- //animation-effect -->
+</head>
+<body>
+{{include 'default/public/header-inner.art'}}
+<!-- banner -->
+<div id="banner-wrapper" class="banner-wrapper">       	
+	<div class="services w3l wow fadeInDown"  data-wow-duration=".8s" data-wow-delay=".2s">
+		<div class="container">
+			<div class="col-md-12 banner-box">
+				<h2 class="col-md-2">新闻资讯</h2>
+				<h4 class="col-md-10">最新的公司新闻、最前沿的业内资讯。</h4>
+			</div>
+		</div>
+	</div>     
+</div>
+<div class="header-wrapper">
+	<div class="services w3l wow fadeInDown"  data-wow-duration=".8s" data-wow-delay=".2s">
+		<div class="container">
+			<div class="grid_3 grid_5">
+				<div class="col-md-12">
+					<a {{if !current}}class="active" {{/if}} href="{{__HOST__}}/news">所有新闻</a>
+					{{each cates}}
+					<a {{if current==$value._id}} class="active" {{/if}} href="{{__HOST__}}/news?id={{@$value._id}}">{{$value.title}}</a>
+					{{/each}}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="services w3l wow fadeInDown"  data-wow-duration=".8s" data-wow-delay=".2s">
+	<div class="container">
+		<div class="grid_3 grid_5">
+			<div class="nav-box">
+				<div class="row">
+					{{ if res.length>0}}
+						{{each res}}
+						<div class="item text-item col-md-4">
+							<a href="{{__HOST__}}/content/{{@$value._id}}">
+								<!-- <img src="{{__HOST__}}/{{$value.img_url}}"> -->
+								<p>{{$value.title}}</p>
+								<div class="desc">{{$value.description.substring(0,60)+'...'}}</div>
+								<div class="more">
+									阅读:{{$value.count}}
+								</div>
+							</a>
+						</div>
+						{{/each}}
+					{{else}}
+						<div class="no-content">暂无内容</div>
+					{{/if}}
+				</div>
+				<div class="row" style="text-align: center;">
+					<div id="pagination" style="display: inline-block;"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{{include 'default/public/footer.art'}}
+</body>
+<script>
+(function(){
+	function News(){
+		this.page=parseInt("{{page}}");
+		this.pagesize=parseInt("{{pagesize}}");
+		console.log("{{pagesize}}")
+		this.totalsize=parseInt("{{totalsize}}");
+	}
+	News.prototype.init=function(){
+		this.bindEvent()
+	}
+	News.prototype.getData=function(){
+		//getSubmit()
+	}
+	News.prototype.bindEvent=function(){
+		var self=this
+		$("#pagination").whjPaging({
+			totalPage: Math.ceil(this.totalsize/this.pagesize),
+			currPage:this.page,
+			pageSize:this.pagesize,
+			isShowTotalSize: false,
+			isShowTotalPage: false,
+			isShowRefresh: false,
+			isShowSkip: false,
+			isShowPageSizeOpt: false,
+			isShowFL: false,
+			callBack: function (currPage) {
+				console.log('currPage:' + currPage);
+				location.href="{{__HOST__}}/news?id={{id}}&page="+currPage;
+			}
+		});
+		
+		$("#pagination").whjPaging("setPage", {currPage: self.page, totalPage: Math.ceil(self.totalsize/self.pagesize), totalSize: self.totalsize});
+	}
+	new News().init()
+})()
+</script>
+</html>

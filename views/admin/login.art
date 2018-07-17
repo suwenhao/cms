@@ -30,6 +30,9 @@
 				margin-top:0px;
 				padding-bottom: 12px;
 			}
+			.loading-box{
+				display: none;
+			}
 		</style>
 	</head>
 
@@ -112,6 +115,7 @@
 					this.bindEvent()
 				}
 				Login.prototype.bindEvent=function(){
+					$("#loading").hide()
 					$('#captcha').click(function(){
 						$(this).attr('src',captchaapi+'?t='+Math.random()*1000)
 					})

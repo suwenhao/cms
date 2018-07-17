@@ -1,12 +1,12 @@
 {
-  "name": "day01",
+  "name": "cms",
   "version": "1.0.0",
-  "description": "",
+  "description": "koa编写的cms后台管理",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js"
   },
-  "author": "",
+  "author": "suwenhao",
   "license": "ISC",
   "dependencies": {
     "art-template": "^4.12.2",

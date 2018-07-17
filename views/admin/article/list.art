@@ -350,7 +350,8 @@
 				*/
 				List.prototype.getData=function(cb){
 					var self=this
-					var url="{{__HOST__}}/admin/article/getdata"
+					var url="{{__HOST__}}/admin/article/getdata";
+					$('#loading').show();
 					getSubmit(url,self.getfilter(),function(res){
 						if(res.code===0){
 							if(res.list.length>0){
@@ -367,6 +368,9 @@
 							self.setFilter(res);
 							sessionStorage.setItem('__edit_cateobj_',JSON.stringify(res.cateobj))
 							$("#pagination").whjPaging("setPage", {currPage: self.page, totalPage: Math.ceil(self.totalSize/self.pagesize), totalSize: self.totalSize});
+							setTimeout(function(){
+								$('#loading').hide();
+							},300)
 							cb&&cb()
 						}
 					})

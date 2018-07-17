@@ -1,3 +1,11 @@
+/*!
+ * Koa CMS Backstage management
+ *
+ * Copyright JS suwenhao
+ * Released under the ISC license
+ * Email swh1057607246@qq.com
+ *
+ */
 var mongoose = require('mongoose')
 var db = require('./db.js')
 

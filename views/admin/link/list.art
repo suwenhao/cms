@@ -144,7 +144,8 @@
 				*/
 				List.prototype.getData=function(cb){
 					var self=this
-					var url="{{__HOST__}}/admin/link/getdata"
+					var url="{{__HOST__}}/admin/link/getdata";
+					$("#loading").show()
 					getSubmit(url,self.getfilter(),function(res){
 						if(res.code===0){
 							if(res.list.length>0){
@@ -160,6 +161,9 @@
 							//设置过滤
 							self.setFilter(res);
 							$("#pagination").whjPaging("setPage", {currPage: self.page, totalPage: Math.ceil(self.totalSize/self.pagesize), totalSize: self.totalSize});
+							setTimeout(function(){
+								$("#loading").hide()
+							},300)
 							cb&&cb()
 						}
 					})
@@ -299,7 +303,6 @@
 						if( parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2) ) return 'right';
 						return 'left';
 					}});
-					
 				}
 				//初始化
 				new List().init()

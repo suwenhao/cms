@@ -1,0 +1,5 @@
+<div id="loading" class="loading-box">
+    <div class="loading">
+        <img src="{{__HOST__}}/loading.svg" alt="">
+    </div>
+</div>

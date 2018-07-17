@@ -21,6 +21,7 @@
 <link rel="stylesheet" href="{{__HOST__}}/admin/css/ace-rtl.min.css" />
 <link rel="stylesheet" href="{{__HOST__}}/admin/css/ace-skins.min.css" />
 <link rel="stylesheet" href="{{__HOST__}}/admin/js/zTree/css/zTreeStyle/zTreeStyle.css" type="text/css">
+<link rel="stylesheet" href="{{__HOST__}}/admin/css/common.css"/>
 <!--[if lte IE 8]>
     <link rel="stylesheet" href="{{__HOST__}}/admin/css/ace-ie.min.css" />
 <![endif]-->

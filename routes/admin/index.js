@@ -1,3 +1,11 @@
+/*!
+ * Koa CMS Backstage management
+ *
+ * Copyright JS suwenhao
+ * Released under the ISC license
+ * Email swh1057607246@qq.com
+ *
+ */
 const router = require('koa-router')();
 const Article = require('../../model/Article.js');
 const Articlecate = require('../../model/Articlecate.js');
@@ -27,8 +35,24 @@ const link = require('./link.js');
 const nav = require('./nav.js');
 const setting = require('./setting.js');
 const user = require('./user.js');
+const url = require('url')
 
 
+router.use('/',async(ctx,next)=>{
+    var pathname=url.parse(ctx.url).pathname;
+    //登录继续向下匹配路由
+    if(ctx.session.userinfo){
+        await next();
+    }else{
+        if(pathname==='/admin/login' 
+        || pathname==='/admin/login/dologin' 
+        || pathname==='/admin/login/code'){
+            await next();
+        }else{
+            ctx.redirect('/admin/login')
+        }
+    }
+})
 router.get('/', async (ctx)=>{
    await ctx.render('admin/index')
 })

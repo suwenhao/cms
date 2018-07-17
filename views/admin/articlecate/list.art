@@ -123,6 +123,7 @@
 				 * @method init 初始化
 				*/
 				List.prototype.init=function(){
+					$("#loading").show()
 					this.bindEvent()
 				}
 				/**
@@ -191,6 +192,9 @@
 						if( parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2) ) return 'right';
 						return 'left';
 					}});
+					setTimeout(function(){
+						$("#loading").hide()
+					},300)
 				}
 				//初始化
 				new List().init()

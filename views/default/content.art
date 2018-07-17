@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>{{res.title}}</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="" />
+{{include 'default/public/header-lib.art'}}
+<script>
+ new WOW().init();
+</script>
+<!-- //animation-effect -->
+</head>
+<body>
+{{include 'default/public/header-inner.art'}}
+<!-- banner -->
+<div id="banner-wrapper" class="banner-wrapper">       	
+    <div class="services w3l wow fadeInDown"  data-wow-duration=".8s" data-wow-delay=".2s">
+        <div class="container">
+            <div class="col-md-12 banner-box">
+                <h2 class="col-md-2" title="{{res.title}}">{{res.title}}</h2>
+                <h4 class="col-md-10" title="{{res.description}}">{{res.description}}</h4>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="services w3l wow fadeInDown" style="background-color:#fff;padding:30px 0;"  data-wow-duration=".8s" data-wow-delay=".2s">
+	<div class="container">
+		<div class="grid_3 grid_5">
+			<div class="nav-box">
+				<div class="row">
+                    <div class="col-md-12">
+						<h4>{{res.title}}</h4>
+						<hr>
+                        {{@res.content}}
+                    </div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{{include 'default/public/footer.art'}}
+</body>
+</html>

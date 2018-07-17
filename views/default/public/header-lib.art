@@ -1,0 +1,17 @@
+<script type="applijewelleryion/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<link href="{{__HOST__}}/default/css/bootstrap.css" rel='stylesheet' type='text/css' />
+<!-- Custom Theme files -->
+<link href='https://fonts.googleapis.com/css?family=Raleway:400,600,700' rel='stylesheet' type='text/css'>
+<link href="{{__HOST__}}/default/css/style.css" rel='stylesheet' type='text/css' />	
+<script>
+    var __HOST__ = "{{__HOST__}}"
+</script>
+<script src="{{__HOST__}}/default/js/jquery-1.11.1.min.js"></script>
+<script src="{{__HOST__}}/default/js/bootstrap.min.js"></script>
+<!-- animation-effect -->
+<link href="{{__HOST__}}/default/css/animate.min.css" rel="stylesheet">
+<link rel="stylesheet" href="{{__HOST__}}/default/js/jqPagination/css/pagination.css">
+<script src="{{__HOST__}}/default/js/wow.min.js"></script>
+<script src="{{__HOST__}}/default/js/jqPagination/js/pagination.min.js"></script>
+<link rel="stylesheet" href="{{__HOST__}}/default/css/common.css">
+<script src="{{__HOST__}}/default/js/util.js"></script>

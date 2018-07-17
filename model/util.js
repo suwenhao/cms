@@ -1,3 +1,11 @@
+/*!
+ * Koa CMS Backstage management
+ *
+ * Copyright JS suwenhao
+ * Released under the ISC license
+ * Email swh1057607246@qq.com
+ *
+ */
 const utils = require('utility');//md5加密
 const multer = require('koa-multer')
 const fs = require('fs')

@@ -1,3 +1,11 @@
+/*!
+ * Koa CMS Backstage management
+ *
+ * Copyright JS suwenhao
+ * Released under the ISC license
+ * Email swh1057607246@qq.com
+ *
+ */
 const router = require('koa-router')();
 const Articlecate = require('../../model/Articlecate.js')
 const util = require('../../model/util.js')

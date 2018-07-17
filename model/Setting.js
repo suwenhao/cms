@@ -1,17 +1,27 @@
+/*!
+ * Koa CMS Backstage management
+ *
+ * Copyright JS suwenhao
+ * Released under the ISC license
+ * Email swh1057607246@qq.com
+ *
+ */
 var mongoose = require('mongoose')
 var db = require('./db.js')
 
 var schema = new mongoose.Schema({
     site_name:{type:String},
-    site_url:{type:String},
     site_logo:{type:String},
-    keywords:{type:String},
-    description:{type:String},
-    icp:{type:String},
-    about:{type:String},
-    phone:{type:String},
-    add_time:{type:Number,default:new Date().getTime()},
-    status:{type:Number}
+    site_keywords:{type:String},
+    site_description:{type:String},
+    site_icp:{type:String},
+    site_about:{type:String},
+    site_qq:{type:String},
+    site_phone:{type:String},
+    site_address:{type:String},
+    site_time:{type:Number,default:new Date().getTime()},
+    site_frist_time:{type:Number,default:new Date().getTime()},
+    site_status:{type:Number}
 })
 
 var Setting = mongoose.model('Setting', schema);

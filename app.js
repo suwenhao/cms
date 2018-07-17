@@ -1,3 +1,11 @@
+/*!
+ * Koa CMS Backstage management
+ *
+ * Copyright JS suwenhao
+ * Released under the ISC license
+ * Email swh1057607246@qq.com
+ *
+ */
 const Koa = require('koa'),
       Router = require('koa-router'),
       ArtTemplate = require('koa-art-template'),
@@ -56,9 +64,7 @@ app.use(compress({
 app.use(async(ctx,next)=>{
     ctx.compress = true
     await next();
-    //404
     if(ctx.status===404){
-        ctx.status=404
         await ctx.render('404')
     }
 })
@@ -66,7 +72,6 @@ app.use(async(ctx,next)=>{
 //全局属性
 router.use(async(ctx,next)=>{
     var pathname=url.parse(ctx.url).pathname.substring(1);
-
     ctx.state={
         __HOST__:'http://'+ctx.request.header.host,
         G:{
@@ -74,17 +79,7 @@ router.use(async(ctx,next)=>{
             url:pathname.split('/')
         }
     }
-   
-    //登录继续向下匹配路由
-    if(ctx.session.userinfo){
-        await next();
-    }else{
-        if(pathname==='admin/login' || pathname==='admin/login/dologin' || pathname==='admin/login/code'){
-            await next();
-        }else{
-            ctx.redirect('/admin/login')
-        }
-    }
+    await next()
 })
 
 //引入路由模块routes
@@ -95,7 +90,6 @@ const api = require('./routes/api.js');
 router.use('/admin',admin);
 router.use('/api',api);
 router.use(index);
-
 
 //启动路由
 app.use(router.routes());

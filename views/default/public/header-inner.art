@@ -1,0 +1,41 @@
+<div class="header" id="ban">
+    <div class="container">
+        <div class="head-left wow fadeInLeft animated animated">
+            <img src="{{__HOST__}}/{{setting.site_logo}}" alt="">
+        </div>
+        <div class="header_right wow fadeInLeft animated animated">
+        <nav class="navbar navbar-default">
+            <!-- 导航的相应式下拉菜单 -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+
+            <!-- 导航 -->
+            <div class="collapse navbar-collapse nav-wil" id="bs-example-navbar-collapse-1">
+                <nav class="link-effect-7" id="link-effect-7">
+                    <ul class="nav navbar-nav">
+                        {{each nav}}
+                            {{if $value.url==pathname}}
+                                <li class="active act"><a href="{{$value.url}}">{{$value.title}}</a></li>
+                            {{else}}
+                                {{if(navobj&&navobj.title==$value.title)}}
+                                    <li class="active act"><a href="{{$value.url}}">{{$value.title}}</a></li>
+                                {{else}}
+                                    <li><a href="{{$value.url}}">{{$value.title}}</a></li>
+                                {{/if}}
+                            {{/if}}
+                        {{/each}}
+                    </ul>
+                </nav>
+            </div>
+            <!-- /.navbar-collapse -->
+        </nav>
+        </div>
+        <div class="clearfix"> </div>	
+    </div>
+</div>
