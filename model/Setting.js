@@ -21,7 +21,10 @@ var schema = new mongoose.Schema({
     site_address:{type:String},
     site_time:{type:Number,default:new Date().getTime()},
     site_frist_time:{type:Number,default:new Date().getTime()},
-    site_status:{type:Number}
+    site_status:{type:Number},
+    site_companyName:{type:String},
+    site_postalCode:{type:String},
+    site_fax:{type:String}
 })
 
 var Setting = mongoose.model('Setting', schema);

@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>成功案例</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="" />
+{{include 'default/public/header-lib.art'}}
+<script>
+ new WOW().init();
+</script>
+<!-- //animation-effect -->
+</head>
+<body>
+{{include 'default/public/header-inner.art'}}
+<!-- banner -->
+<div id="banner-wrapper" class="banner-wrapper">       	
+	<div class="services w3l wow fadeInDown"  data-wow-duration=".8s" data-wow-delay=".2s">
+		<div class="container">
+			<div class="col-md-12 banner-box">
+				<h2 class="col-md-2">关于我们</h2>
+				<h4 class="col-md-10">让品牌与您同在。</h4>
+			</div>
+		</div>
+	</div>     
+</div>
+<div class="header-wrapper">
+	<div class="services w3l wow fadeInDown"  data-wow-duration=".8s" data-wow-delay=".2s">
+		<div class="container">
+			<div class="grid_3 grid_5">
+				<div class="col-md-12">
+					{{each abouts}}
+					<a {{if current==$value._id}} class="active" {{/if}} href="{{__HOST__}}/about?id={{@$value._id}}">{{$value.title}}</a>
+					{{/each}}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="services w3l wow fadeInDown"  data-wow-duration=".8s" data-wow-delay=".2s">
+	<div class="container">
+		<div class="grid_3 grid_5" style="background-color: #fff;">
+			<div class="nav-box" style="padding:20px;">
+				<div class="row">
+					<div class="col-md-12" style="height:200px;background:url({{__HOST__}}/default/images/banner-1.jpg);background-size:100%;">
+					</div>
+					<div class="col-md-12" style="margin-top:30px;">
+						{{@data.content}}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{{include 'default/public/footer.art'}}
+</body>
+<script>
+(function(){
+	function Case(){
+		
+	}
+	Case.prototype.init=function(){
+		this.bindEvent()
+	}
+	Case.prototype.getData=function(){
+		//getSubmit()
+	}
+	Case.prototype.bindEvent=function(){
+		var self=this
+		
+	}
+	new Case().init()
+})()
+</script>
+</html>

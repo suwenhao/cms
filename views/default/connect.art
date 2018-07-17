@@ -1,0 +1,91 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>成功案例</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="" />
+{{include 'default/public/header-lib.art'}}
+<script>
+ new WOW().init();
+</script>
+<!-- //animation-effect -->
+</head>
+<body>
+{{include 'default/public/header-inner.art'}}
+<!-- banner -->
+<div id="banner-wrapper" class="banner-wrapper">       	
+	<div class="services w3l wow fadeInDown"  data-wow-duration=".8s" data-wow-delay=".2s">
+		<div class="container">
+			<div class="col-md-12 banner-box">
+				<h2 class="col-md-2">联系我们</h2>
+				<h4 class="col-md-10">联系我们可以发送信息留言，或者邮箱留言。</h4>
+			</div>
+		</div>
+	</div>     
+</div>
+<div class="services w3l wow fadeInDown"  data-wow-duration=".8s" data-wow-delay=".2s">
+	<div class="container">
+		<div class="grid_3 grid_5" style="background-color: #fff;">
+			<div class="nav-box" style="padding:20px;">
+				<div class="row">
+					<div class="col-md-12">
+						<h3>联系我们</h3>
+						<hr>
+						<br>
+						<div style="height:122px;background:url({{__HOST__}}/default/images/contact.gif) left no-repeat;"></div>
+						<table class="table table-bordered">
+							<tbody>
+								<tr>
+									<td>公司名称</td>
+									<td>{{setting.site_companyName}}</td>
+								</tr>
+								<tr>
+									<td>公司地址</td>
+									<td>{{setting.site_address}}</td>
+								</tr>
+								<tr>
+									<td>联系电话</td>
+									<td>{{setting.site_phone}}</td>
+								</tr>
+								<tr>
+									<td>联系QQ</td>
+									<td>{{setting.site_qq}}</td>
+								</tr>
+								<tr>
+									<td>邮政编码</td>
+									<td>{{setting.site_postalCode}}</td>
+								</tr>
+								<tr>
+									<td>传真</td>
+									<td>{{setting.site_fax}}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{{include 'default/public/footer.art'}}
+</body>
+<script>
+(function(){
+	function Case(){
+		
+	}
+	Case.prototype.init=function(){
+		this.bindEvent()
+	}
+	Case.prototype.getData=function(){
+		//getSubmit()
+	}
+	Case.prototype.bindEvent=function(){
+		var self=this
+		
+	}
+	new Case().init()
+})()
+</script>
+</html>

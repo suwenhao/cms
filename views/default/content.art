@@ -10,6 +10,14 @@
  new WOW().init();
 </script>
 <!-- //animation-effect -->
+<style>
+    @media (max-width: 768px){
+        .nav-box img{
+            width:100%;
+        }
+    }
+   
+</style>
 </head>
 <body>
 {{include 'default/public/header-inner.art'}}

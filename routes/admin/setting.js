@@ -20,10 +20,10 @@ router.get('/', async (ctx)=>{
 
 router.post('/doedit',util.upload().single('pic'), async (ctx)=>{
     let file = ctx.req.file;
-    let {id,site_name,site_icp,site_qq,site_phone,site_about,logo,site_address,site_status,site_keywords,site_description} = ctx.req.body;
+    let {id,site_name,site_icp,site_qq,site_phone,site_about,logo,site_address,site_companyName,site_postalCode,site_fax,site_status,site_keywords,site_description} = ctx.req.body;
     var obj={
         site_logo:file?file.path.replace(/statics\\/,'').replace(/\\/g,'/'):logo,
-        site_name,site_icp,site_qq,site_phone,site_about,site_address,site_status,site_keywords,site_description
+        site_name,site_icp,site_qq,site_phone,site_about,site_address,site_companyName,site_postalCode,site_fax,site_status,site_keywords,site_description
     }
     let data = await Setting.update({_id:id},{$set:obj});
     if(data){

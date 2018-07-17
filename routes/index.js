@@ -123,10 +123,25 @@ router.get('/news', async (ctx)=>{
     })
 })
 router.get('/about', async (ctx)=>{
-    await ctx.render('default/index')
+    let {id} = ctx.query
+    var result = await Article.find({cid:'5b4db2d13d90e253a8f3dd91',status:1}).sort({sort:1}).lean()
+    var data={}
+    if(id){
+        result.forEach(v=>{
+            if(v._id==id){
+                data=v
+                return;
+            }
+        })
+    }
+    await ctx.render('default/about',{
+        abouts:result,
+        current:id||result[0]._id,
+        data:id?data:result[0]
+    })
 })
 router.get('/connect', async (ctx)=>{
-    await ctx.render('default/index')
+    await ctx.render('default/connect')
 })
 
 module.exports = router.routes()
