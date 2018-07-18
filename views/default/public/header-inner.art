@@ -1,7 +1,7 @@
 <div class="header" id="ban">
     <div class="container">
         <div class="head-left wow fadeInLeft animated animated">
-            <img src="{{__HOST__}}/{{setting.site_logo}}" alt="">
+            <a href="/"> <img src="{{__HOST__}}/{{setting.site_logo}}" alt="{{setting.site_name}}"></a>
         </div>
         <div class="header_right wow fadeInLeft animated animated">
         <nav class="navbar navbar-default">

@@ -1,10 +1,11 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Home</title>
+<title>{{setting.site_name}}</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords" content="" />
+<meta name="keywords" content="{{setting.site_keywords}}" />
+<meta name="description" content="{{setting.site_description}}" />
 {{include 'default/public/header-lib.art'}}
 
 <link href="{{__HOST__}}/default/css/swiper.min.css" rel="stylesheet"> 
@@ -77,79 +78,25 @@
 					<div class="clearfix"></div>
 				</div>
 				<!-- technology-top -->
+				{{each three}}
 				<div class="wthree">
 					<div class="col-md-6 wthree-left wow fadeInDown"  data-wow-duration=".8s" data-wow-delay=".2s">
 						<div class="tch-img">
-								<a href="singlepage.html"><img src="{{__HOST__}}/default/images/f1.jpg" class="img-responsive" alt=""></a>
-							</div>
+							<a href="{{__HOST__}}/content/{{@$value._id}}"><img src="{{__HOST__}}/{{$value.img_url}}" class="img-responsive" alt="{{$value.title}}"></a>
+						</div>
 					</div>
 					<div class="col-md-6 wthree-right wow fadeInDown"  data-wow-duration=".8s" data-wow-delay=".2s">
-							<h3><a href="singlepage.html">Lorem Ipsum is simply</a></h3>
-							<h6>BY <a href="singlepage.html">ADAM ROSE </a>JULY 10 2016.</h6>
-								<p>Ut enim ad minim veniam, quis nostrud eiusmod tempor incididunt ut labore et dolore magna aliqua exercitation ullamco laboris .</p>
-								<div class="bht1">
-									<a href="singlepage.html">Read More</a>
-								</div>
-								<div class="soci">
-									<ul>
-										
-										<li class="hvr-rectangle-out"><a class="twit" href="#"></a></li>
-										<li class="hvr-rectangle-out"><a class="pin" href="#"></a></li>
-									</ul>
-								</div>
-								<div class="clearfix"></div>
-						
-					</div>
+						<h3><a href="{{__HOST__}}/content/{{@$value._id}}">{{$value.title}}</a></h3>
+						<h6>{{$value.add_time | dateFormat}}</h6>
+						<p>{{$value.description}}</p>
+						<div class="bht1">
+							<a href="{{__HOST__}}/content/{{@$value._id}}">查看</a>
+						</div>
 						<div class="clearfix"></div>
+					</div>
+					<div class="clearfix"></div>
 				</div>
-				<div class="wthree">
-					<div class="col-md-6 wthree-left wow fadeInDown"  data-wow-duration=".8s" data-wow-delay=".2s">
-						<div class="tch-img">
-								<a href="singlepage.html"><img src="{{__HOST__}}/default/images/f2.jpg" class="img-responsive" alt=""></a>
-							</div>
-					</div>
-					<div class="col-md-6 wthree-right wow fadeInDown"  data-wow-duration=".8s" data-wow-delay=".2s">
-							<h3><a href="singlepage.html">Lorem Ipsum is simply</a></h3>
-							<h6>BY <a href="singlepage.html">ADAM ROSE </a>JULY 10 2016.</h6>
-								<p>Ut enim ad minim veniam, quis nostrud eiusmod tempor incididunt ut labore et dolore magna aliqua exercitation ullamco laboris .</p>
-								<div class="bht1">
-									<a href="singlepage.html">Read More</a>
-								</div>
-								<div class="soci">
-									<ul>
-										<li class="hvr-rectangle-out"><a class="goog" href="#"></a></li>									
-										<li class="hvr-rectangle-out"><a class="fb" href="#"></a></li>
-									</ul>
-								</div>
-								<div class="clearfix"></div>
-						
-					</div>
-						<div class="clearfix"></div>
-				</div>
-				<div class="wthree">
-					<div class="col-md-6 wthree-left wow fadeInDown"  data-wow-duration=".8s" data-wow-delay=".2s">
-						<div class="tch-img">
-								<a href="singlepage.html"><img src="{{__HOST__}}/default/images/f3.jpg" class="img-responsive" alt=""></a>
-							</div>
-					</div>
-					<div class="col-md-6 wthree-right wow fadeInDown"  data-wow-duration=".8s" data-wow-delay=".2s">
-							<h3><a href="singlepage.html">Lorem Ipsum is simply</a></h3>
-							<h6>BY <a href="singlepage.html">ADAM ROSE </a>JULY 10 2016.</h6>
-								<p>Ut enim ad minim veniam, quis nostrud eiusmod tempor incididunt ut labore et dolore magna aliqua exercitation ullamco laboris.</p>
-								<div class="bht1">
-									<a href="singlepage.html">Read More</a>
-								</div>
-								<div class="soci">
-									<ul>
-										<li class="hvr-rectangle-out"><a class="drib" href="#"></a></li>
-										<li class="hvr-rectangle-out"><a class="goog" href="#"></a></li>
-									</ul>
-								</div>
-								<div class="clearfix"></div>
-						
-					</div>
-						<div class="clearfix"></div>
-				</div>
+				{{/each}}
 			</div>
 		</div>
 	</div>
