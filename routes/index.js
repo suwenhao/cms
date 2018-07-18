@@ -50,6 +50,7 @@ router.get('/content/:id', async (ctx)=>{
     var id = ctx.params.id;
     if(id){
         var result =await Article.findOne({_id:id}).lean()
+        //判断是一级还是二级分类
         try {
             var res = await Articlecate.findOne({_id:result.cid})
             var res1 = await Articlecate.findOne({_id:res.pid})
@@ -76,6 +77,7 @@ router.get('/case', async (ctx)=>{
 
     var acr =await Articlecate.find({pid:'5b414f2e7bbcbfffd43a61df'}).sort({sort:1}).lean()
     if(id){
+        //判断是一级还是二级分类
         try {
             var acr1 =await Articlecate.findOne({_id:id,status:1}).sort({sort:1}).lean()
             var ar =await Article.find({cid:acr1._id,status:1}).skip(skip).limit(limit).sort({sort:1}).lean()
@@ -110,6 +112,7 @@ router.get('/news', async (ctx)=>{
 
     var acr =await Articlecate.find({pid:'5b414f827bbcbfffd43a61e3'}).sort({sort:1}).lean()
     if(id){
+        //判断是一级还是二级分类
         try {
             var acr1 =await Articlecate.findOne({_id:id,status:1}).sort({sort:1}).lean()
             var ar =await Article.find({cid:acr1._id,status:1}).skip(skip).limit(limit).sort({sort:1}).lean()

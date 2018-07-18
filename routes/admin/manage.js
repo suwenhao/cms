@@ -38,7 +38,7 @@ router.post('/doadd',async(ctx)=>{
         if(result){
             ctx.body={msg:'增加管理员成功',code:0,result}
         }else{
-            ctx.body={msg:'增加管理员失败',code:1}
+            ctx.body={msg:'增加管理员失败',code:2}
         }
     }
 })

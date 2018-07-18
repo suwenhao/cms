@@ -106,3 +106,4 @@ cms后台内容管理系统，基于NodeJs的WEB开发框架koa开发，数据�
 3. 需要增加集合的字段的话，在model文件夹对应的model里修改schema，注：自行学习mongoose的使用
 4. 业务逻辑在routes文件夹里，router分发里写了逻辑，没有放到controller里是因为不必要多出多余的require 
 5. 接口文档在Wiki这里
+    - <img src="./doc/view/api.png" width="300">

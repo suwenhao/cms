@@ -34,7 +34,6 @@ const focus = require('./focus.js');
 const link = require('./link.js');
 const nav = require('./nav.js');
 const setting = require('./setting.js');
-const user = require('./user.js');
 const url = require('url')
 
 
@@ -73,9 +72,9 @@ router.get('/changeStatus', async (ctx)=>{
     }
     let result = await mongodbModel[collectionName].update({'_id':id},{$set:obj});
     if(result){
-        ctx.body={msg:'更新成功',code:0,data:obj}
+        ctx.body={msg:'修改成功',code:0,data:obj}
     }else{
-        ctx.body={msg:'更新失败',code:1,data:obj}
+        ctx.body={msg:'修改失败',code:1,data:obj}
     }
 })
 //删除
@@ -106,7 +105,6 @@ router.use('/focus',focus);
 router.use('/link',link);
 router.use('/nav',nav);
 router.use('/setting',setting);
-router.use('/user',user);
 
 router.all('/editor/controller', ueditor(['statics', {
 	"imageAllowFiles": [".png", ".jpg", ".jpeg","gif","ico","svg"],

@@ -115,12 +115,12 @@ router.post('/doadd',util.upload().single('pic'),async (ctx)=>{
     if(result){
         ctx.body={
             code:0,
-            msg:'提交文章成功'
+            msg:'提交内容成功'
         }
     }else{
         ctx.body={
             code:1,
-            msg:'提交文章失败'
+            msg:'提交内容失败'
         }
     }
     
@@ -165,12 +165,12 @@ router.post('/doedit',util.upload().single('pic'), async (ctx)=>{
     if(data){
         ctx.body={
             code:0,
-            msg:'修改文章成功'
+            msg:'修改内容成功'
         }
     }else{
         ctx.body={
             code:1,
-            msg:'修改文章失败'
+            msg:'修改内容失败'
         }
     }
 })
