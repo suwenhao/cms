@@ -30,8 +30,14 @@ router.use(async(ctx,next)=>{
 })
 router.get('/', async (ctx)=>{
     let focusResult =await Focus.find({status:1}).sort({sort:1}).lean()
+    let ArticleResult =await Article.findOne({is_best:1,status:1}).sort({sort:1}).lean()
+    let ArticleResult1 =await Article.find({status:1}).skip(0).limit(2).sort({sort:-1}).lean()
+    let ArticleResult2 =await Article.find({status:1}).skip(2).limit(3).sort({sort:-1}).lean()
     await ctx.render('default/index',{
-        focus:focusResult
+        focus:focusResult,
+        one:ArticleResult,
+        two:ArticleResult1,
+        three:ArticleResult2
     })
 })
 router.get('/service', async (ctx)=>{
@@ -42,17 +48,22 @@ router.get('/service', async (ctx)=>{
 })
 router.get('/content/:id', async (ctx)=>{
     var id = ctx.params.id;
-    var result =await Article.findOne({_id:id}).lean()
-    try {
-        var res = await Articlecate.findOne({_id:result.cid})
-        var res1 = await Articlecate.findOne({_id:res.pid})
-    } catch (error) {
-        var res1 = await Articlecate.findOne({_id:result.cid})
+    if(id){
+        var result =await Article.findOne({_id:id}).lean()
+        try {
+            var res = await Articlecate.findOne({_id:result.cid})
+            var res1 = await Articlecate.findOne({_id:res.pid})
+        } catch (error) {
+            var res1 = await Articlecate.findOne({_id:result.cid})
+        }
+        await ctx.render('default/content',{
+            res:result,
+            navobj:res1,
+            id
+        })
+    }else{
+        await ctx.redirect('/404')
     }
-    await ctx.render('default/content',{
-        res:result,
-        navobj:res1
-    })
 })
 router.get('/case', async (ctx)=>{
     var {id,page} = ctx.query
@@ -142,6 +153,16 @@ router.get('/about', async (ctx)=>{
 })
 router.get('/connect', async (ctx)=>{
     await ctx.render('default/connect')
+})
+router.post('/default/changeCount', async (ctx)=>{
+    let {id} = ctx.request.body
+    // console.log(ctx.request.body)
+    try {
+        let data = await Article.update({_id:id},{$inc: {"count": 1}})
+    ctx.body = {code:0,msg:'修改阅读数成功'}
+    } catch (error) {
+        await ctx.redirect('/404')
+    }
 })
 
 module.exports = router.routes()

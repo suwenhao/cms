@@ -48,5 +48,22 @@
 	</div>
 </div>
 {{include 'default/public/footer.art'}}
+<script>
+    function Content(){}
+    Content.prototype.init=function(){
+        this.bindAjax()
+    }
+    Content.prototype.bindAjax=function(){
+        $.ajax({
+            type:'post',
+            url:'{{__HOST__}}/default/changeCount',
+            data:{id:"{{id}}"},
+            success:function(res){
+                console.log(res)
+            }
+        })
+    }
+    new Content().init()
+</script>
 </body>
 </html>

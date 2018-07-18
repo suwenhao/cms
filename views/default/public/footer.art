@@ -18,7 +18,7 @@
             <h4>留言</h4>
             <p>可以发送把您的邮箱联系我们</p>
             <div class="name">
-                <form action="#" method="post">
+                <form>
                     <div>
                        <div class="col-md-6" style="padding:0;padding-right:15px;">
                             <input type="text" placeholder="名字" required="">
@@ -30,9 +30,8 @@
                     <input type="text" placeholder="邮箱" required="">
                     <input type="submit" value="留言">
                 </form>
-            
             </div>	
-            <div class="clearfix"> </div>
+            <div class="clearfix"></div>
         </div>
         <div class="clearfix"></div>
     </div>
