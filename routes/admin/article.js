@@ -62,6 +62,7 @@ router.get('/getdata', async (ctx)=>{
         list:data.map(v=>{
             return {
                 ...v,
+                img_url:v.img_url.replace(/statics\//,''),
                 add_time:sd.format(new Date(v.add_time), 'YYYY-MM-DD HH:mm')
             }
         }),
