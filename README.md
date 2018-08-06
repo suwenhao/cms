@@ -59,7 +59,7 @@ cms后台内容管理系统，基于NodeJs的WEB开发框架koa开发，数据�
     - 如下：
     - mongorestore -h 127.0.0.1 -d koacms ./koacms
 4. npm install 或者 yarn install
-5. 确认数据库已经开启，然后在跟文件夹node app.js就可以了
+5. 确认数据库已经开启，然后在根文件夹node app.js就可以了
 6. 打开网页
     - 前台链接 http://localhost:3000/
     - 后台链接 http://localhost:/admin
