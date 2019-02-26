@@ -1,5 +1,5 @@
 # cms后台管理系统
-在线预览：http://182.61.33.39:3000/
+在线预览：http://www.suwh.club:3000/
 
 #### 项目介绍
 cms后台内容管理系统，基于NodeJs的WEB开发框架koa开发，数据库使用mongodb。主要功能实现对与前台页面内容导航等等的管理（比如一些企业站）。
@@ -9,24 +9,24 @@ cms后台内容管理系统，基于NodeJs的WEB开发框架koa开发，数据�
 
 #### 项目预览
 
-<img src="./doc/view/manage.png" width="300">
-<img src="./doc/view/articlecate_list.png" width="300">
-<img src="./doc/view/articlecate_edit.png" width="300">
-<img src="./doc/view/article.png" width="300">
-<img src="./doc/view/article_edit.png" width="300">
-<img src="./doc/view/article_edit1.png" width="300">
-<img src="./doc/view/focus.png" width="300">
-<img src="./doc/view/focus_edit.png" width="300">
-<img src="./doc/view/link.png" width="300">
-<img src="./doc/view/nav.png" width="300">
-<img src="./doc/view/setting.png" width="300">
-<img src="./doc/view/index.png" width="300">
-<img src="./doc/view/service.png" width="300">
-<img src="./doc/view/case.png" width="300">
-<img src="./doc/view/news.png" width="300">
-<img src="./doc/view/about.png" width="300">
-<img src="./doc/view/connect.png" width="300">
-<img src="./doc/view/content.png" width="300">
+<img src="./doc/view/manage.png" width="900">
+<img src="./doc/view/articlecate_list.png" width="900">
+<img src="./doc/view/articlecate_edit.png" width="900">
+<img src="./doc/view/article.png" width="900">
+<img src="./doc/view/article_edit.png" width="900">
+<img src="./doc/view/article_edit1.png" width="900">
+<img src="./doc/view/focus.png" width="900">
+<img src="./doc/view/focus_edit.png" width="900">
+<img src="./doc/view/link.png" width="900">
+<img src="./doc/view/nav.png" width="900">
+<img src="./doc/view/setting.png" width="900">
+<img src="./doc/view/index.png" width="900">
+<img src="./doc/view/service.png" width="900">
+<img src="./doc/view/case.png" width="900">
+<img src="./doc/view/news.png" width="900">
+<img src="./doc/view/about.png" width="900">
+<img src="./doc/view/connect.png" width="900">
+<img src="./doc/view/content.png" width="900">
 
 #### 软件架构
 软件架构说明
